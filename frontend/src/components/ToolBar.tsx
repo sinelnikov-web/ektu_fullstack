@@ -34,7 +34,7 @@ const ToolBar = React.memo<ToolBarProps>(({openedAppList, setFiles}) => {
         <ToolBarStyled>
             <div className="toolbar__left-side">
                 <ToolbarMainIcon appId={-1} onClick={onFileMaximize} isActive={false}>
-                    <StartUpIcon/>
+                    <StartUpIcon className={'startup-icon'}/>
                 </ToolbarMainIcon>
                 <ToolbarMainIcon appId={-2} onClick={onFileMaximize} isActive={false}>
                     <SearchIcon/>

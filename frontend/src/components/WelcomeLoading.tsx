@@ -42,7 +42,7 @@ const WelcomeLoadingStyled = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background: url(${WelcomeBackground}) no-repeat center center;
+  background: #0077d3 url(${WelcomeBackground}) no-repeat center center;
   background-size: cover;
   z-index: 10000;
   transition: opacity 0.4s linear;
@@ -115,10 +115,10 @@ const WelcomeLoadingStyled = styled.div`
     display: none;
   }
   @keyframes disappearing {
-    from {
+    0% {
       opacity: 1;
     }
-    to {
+    100% {
       opacity: 0;
     }
   }

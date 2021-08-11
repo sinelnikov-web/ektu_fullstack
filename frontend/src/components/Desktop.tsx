@@ -30,6 +30,7 @@ interface DesktopProps {
     setFiles: (cllbck: (files: Array<FileType>) => Array<FileType>) => void
     files: Array<FileType>
     filesTree: Array<FileType>
+    setLoading: (state: boolean)=>void
 }
 
 // let obj = {
@@ -54,7 +55,7 @@ interface DesktopProps {
 
 const Desktop = React.memo<DesktopProps>(({
                                               setOpenedAppList, openedAppList,
-                                          files, setFiles, filesTree}) => {
+                                          files, setFiles, filesTree, setLoading}) => {
 
 
 
@@ -115,9 +116,16 @@ const Desktop = React.memo<DesktopProps>(({
             })
         })
     }
+
+    const backgroundLoaded = () => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000)
+    }
+
     return (
         <DesktopStyled>
-            <img className={'desktop-bg'} src={desktopBackground} alt=""/>
+            <img className={'desktop-bg'} src={desktopBackground} alt="" onLoad={backgroundLoaded}/>
             {
                 filesTree.map(file => {
                     return(

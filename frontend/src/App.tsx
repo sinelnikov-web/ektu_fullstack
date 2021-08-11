@@ -75,7 +75,7 @@ function App() {
                     isOpen: false,
                     isFocusedOnWindow: false,
                     isMinimized: false,
-                    link: 'https://5da995bbd91b.ngrok.io/doc',
+                    link: 'https://78dd97657404.ngrok.io/docs',
                     innerFiles: []
                 }
             ]
@@ -85,19 +85,21 @@ function App() {
     const [files, setFiles] = useState<FileType[]>(() => openTree(filesTree))
     const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 5000)
-    }, [])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setIsLoading(false)
+    //     }, 5000)
+    // }, [])
 
     return (
         <AppStyled className="App">
             <GlobalStyles/>
-            {/*<WelcomeLoading isLoading={isLoading}/>*/}
+            <WelcomeLoading isLoading={isLoading}/>
             {/*<WindowsLoading isLoading={isLoading}/>*/}
-            <Desktop filesTree={filesTree} files={files} setFiles={setFiles} setOpenedAppList={setOpenedAppList} openedAppList={openedAppList}/>
+            <Desktop filesTree={filesTree} files={files} setFiles={setFiles} setOpenedAppList={setOpenedAppList}
+                     openedAppList={openedAppList} setLoading={setIsLoading}/>
             <ToolBar setFiles={setFiles} openedAppList={openedAppList}/>
+
         </AppStyled>
     );
 }

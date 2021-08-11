@@ -1,4 +1,4 @@
-import React, {useEffect, useState, MouseEvent, DragEvent, ReactElement, useRef} from 'react';
+import React, {useEffect, useState, MouseEvent, DragEvent, ReactElement, useRef, TouchEvent} from 'react';
 import EmptyFolderIcon from '../assets/images/empty_folder.png'
 import styled from "styled-components";
 import {FileType} from "./Desktop";
@@ -62,6 +62,24 @@ const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, o
         setTopBarMouseDown(false)
     }
 
+    const catchMobileWindow = (e: TouchEvent<HTMLDivElement>) => {
+        onWindowFocus(id)
+        if (fullScreen) {
+            setFullScreen(false)
+        }
+        // @ts-ignore
+        windowRef.current.style.top = top + (e.touches[0].clientY - cursorY) + 'px'
+        // @ts-ignore
+        windowRef.current.style.left = left + (e.touches[0].clientX - cursorX) + 'px'
+        setTop(prev => prev + (e.touches[0].clientY - cursorY))
+        setLeft(prev => prev + (e.touches[0].clientX - cursorX))
+        setCursorX(e.touches[0].clientX)
+        setCursorY(e.touches[0].clientY)
+
+        setCaught(true)
+
+    }
+
     const closeWindow = (e: MouseEvent<HTMLButtonElement>) => {
         setClosing(true)
         onFileClose(file.id)
@@ -104,6 +122,7 @@ const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, o
                 className="window__top-bar top-bar"
                 id={'top-bar'}
                 onMouseDown={() => setTopBarMouseDown(true)}
+                onTouchMove={catchMobileWindow}
             >
                 <div className="top-bar__left-side">
                     <span>{file.title}</span>

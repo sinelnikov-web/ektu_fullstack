@@ -26,6 +26,9 @@ const ToolbarMainIconStyled = styled.div`
   cursor: default;
   &:hover {
     filter: brightness(140%);
+    .startup-icon {
+      fill: aqua;
+    }
   }
   
   &.toolbar__icon.active {

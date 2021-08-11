@@ -66,6 +66,7 @@ const FileStyled = styled.div`
     padding: 0.5rem;
     img {
       width: 6rem;
+      height: 6rem;
       object-fit: cover;
     }
   }

@@ -8,7 +8,7 @@ interface WordFileProps {
 const WordFile: React.FC<WordFileProps> = ({src}) => {
     return (
         <WordFileStyled>
-            <iframe className={'word-file'} src={'https://view.officeapps.live.com/op/view.aspx?src=' + src} frameBorder="0"/>
+            <iframe className={'word-file'} src={'https://view.officeapps.live.com/op/embed.aspx?src=' + src} frameBorder="0"/>
         </WordFileStyled>
     );
 };
