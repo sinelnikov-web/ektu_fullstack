@@ -6,15 +6,24 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-def index(request):
+from frontend.models import File, Activity
 
-    with open(os.path.join(settings.BASE_DIR, 'frontend/test2.docx'), 'rb') as file:
-        return HttpResponse(file.read(), content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-    # return render(request, 'build/index.html')
+from frontend.serializers import FileSerializer, ActivitySerializer
 
 
-def doc(request):
-    with open(os.path.join(settings.BASE_DIR, 'frontend/test2.docx'), 'rb') as file:
-        return HttpResponse(file.read(), content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-    # return render(request, 'build/index.html')
+class FileView(APIView):
+
+    def get(self, request):
+        files = File.objects.filter(parent=None)
+        serializer = FileSerializer(files, many=True)
+        return Response(serializer.data)
+
+class ActivityView(APIView):
+
+    def get(self, request):
+        activities = Activity.objects.all()
+        serializer = ActivitySerializer(activities, many=True)
+        return Response(serializer.data)

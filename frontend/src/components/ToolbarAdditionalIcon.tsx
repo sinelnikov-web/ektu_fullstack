@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from "styled-components";
 
-const ToolbarMainIcon: React.FC = ({children}) => {
+interface ToolbarAdditionalIcon {
+    pupup: React.Component
+}
+
+const ToolbarAdditionalIcon: React.FC = ({children}) => {
     return (
-        <ToolbarAdditionalIconStyled>
+        <ToolbarAdditionalIconStyled className={'toolbar__additional-icon'}>
             {children}
         </ToolbarAdditionalIconStyled>
     );
 };
 
 const ToolbarAdditionalIconStyled = styled.div`
-  padding: 1rem 0;
   height: 100%;
   background-color: var(--toolbar-bg-color);
   display: flex;
@@ -18,9 +21,6 @@ const ToolbarAdditionalIconStyled = styled.div`
   align-items: center;
   font-size: 1.5rem;
   cursor: default;
-  &:hover {
-    filter: brightness(140%);
-  }
   
   svg {
     width: 55%;
@@ -28,4 +28,4 @@ const ToolbarAdditionalIconStyled = styled.div`
   }
 `
 
-export default ToolbarMainIcon;
+export default ToolbarAdditionalIcon;

@@ -1,21 +1,27 @@
-import React, {Component, DragEventHandler, ReactElement, useEffect, useRef} from 'react';
+import React, {Component, DragEventHandler, ReactElement, useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import EmptyFolderIcon from "../assets/images/empty_folder.png";
 import FileIcon from "./FileIcon";
 import {FileType, FileTypes} from "./Desktop";
 
 interface FileProps {
-    onDoubleClick: (title: string, type: FileTypes, id: number) => void
-    onFileClose: (id: number) => void
+    onDoubleClick?: (title: string, type: FileTypes, id: number) => void
+    onClick?: (id: number) => void
     files: Array<FileType>
     file: FileType
 }
 
-const File = React.memo<FileProps>(({onDoubleClick,
-                                       files, onFileClose, file}) => {
+const File = React.memo<FileProps>(({onDoubleClick= () => {},
+                                       files, file, onClick=()=>{}}) => {
 
-    const openFile = () => {
+    const [isFocused, setIsFocused] = useState(false)
+
+    const openFileDoubleClick = () => {
         onDoubleClick(file.title, file.type, file.id)
+    }
+
+    const openFileClick = () => {
+        onClick(file.id)
     }
 
     const fileRef = useRef(null)
@@ -31,13 +37,18 @@ const File = React.memo<FileProps>(({onDoubleClick,
         e.currentTarget.classList.remove('hold')
     }
     return (
-        <FileStyled ref={fileRef}>
+        <FileStyled ref={fileRef} className={'file-wrapper'}>
             <div
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                onKeyUp={(e) => isFocused && e.code === 'Enter' ? openFileDoubleClick() : null}
+                tabIndex={1}
                 className="file"
                 draggable
                 onDragStart={dragStart}
                 onDragEnd={dragEnd}
-                onDoubleClick={openFile}
+                onDoubleClick={openFileDoubleClick}
+                onClick={openFileClick}
             >
                 <div className="file__icon">
                     <FileIcon icon={file.icon}/>
@@ -49,8 +60,9 @@ const File = React.memo<FileProps>(({onDoubleClick,
 });
 
 const FileStyled = styled.div`
-  
+  display: block;
   text-align: center;
+  max-width: 7rem;
   
   .file:hover {
     &:hover {

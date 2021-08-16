@@ -1,5 +1,6 @@
 import React, {useState, WheelEvent} from 'react';
 import styled from "styled-components";
+import {baseURL} from "../api/base";
 
 interface ImageProps {
     src: string
@@ -17,7 +18,7 @@ const Image: React.FC<ImageProps> = ({src}) => {
     }
     return (
         <ImageStyled scale={scale} onWheel={scaleImage}>
-            <img src={src} alt=""/>
+            <img src={baseURL + src} alt=""/>
         </ImageStyled>
     );
 };

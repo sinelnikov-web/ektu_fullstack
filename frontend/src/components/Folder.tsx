@@ -7,13 +7,12 @@ import Window from "./Window";
 interface FolderProps {
     innerFiles: Array<FileType>
     onDoubleClick: (title: string, type: FileTypes, id: number) => void
-    onFileClose: (id: number) => void
     files: Array<FileType>
 }
 
 
 
-const Folder:React.FC<FolderProps> = ({innerFiles, onDoubleClick, onFileClose, files}) => {
+const Folder:React.FC<FolderProps> = ({innerFiles, onDoubleClick, files}) => {
     return (
         <FolderStyled className={'folder'}>
             {innerFiles.map(file => {
@@ -21,7 +20,6 @@ const Folder:React.FC<FolderProps> = ({innerFiles, onDoubleClick, onFileClose, f
                     <File
                         key={file.id}
                         onDoubleClick={onDoubleClick}
-                        onFileClose={onFileClose}
                         files={files}
                         file={file}
                     />

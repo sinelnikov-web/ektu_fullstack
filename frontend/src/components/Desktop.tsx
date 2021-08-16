@@ -1,16 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Window from "./Window";
 import File from "./File";
-import EmptyFolderIcon from "../assets/images/empty_folder.png";
-import ImageIcon from "../assets/images/image.jpg";
 import styled from "styled-components";
 import desktopBackground from "../assets/images/desktop_bg.jpg"
 import Folder from "./Folder";
-import {openTree} from "../utils/openTree";
 import Image from "./Image";
 import WordFile from "./WordFile";
+import InstagramWidget from "./InstagramWidget";
 
-export type FileTypes = 'folder' | 'application' | 'image' | 'word'
+export type FileTypes = 'folder' | 'application' | 'image' | 'office' | 'widget'
 
 export type FileType = {
     id: number
@@ -21,42 +19,24 @@ export type FileType = {
     isFocusedOnWindow: boolean
     innerFiles: Array<FileType>
     isMinimized: boolean
-    link: string
+    link: string | null
+    file: string | null
 }
 
 interface DesktopProps {
-    setOpenedAppList: (openedAppList:Array<FileType>) => void
+    setOpenedAppList: (openedAppList: Array<FileType>) => void
     openedAppList: Array<FileType>
     setFiles: (cllbck: (files: Array<FileType>) => Array<FileType>) => void
     files: Array<FileType>
     filesTree: Array<FileType>
-    setLoading: (state: boolean)=>void
+    setLoading: (state: boolean) => void
 }
 
-// let obj = {
-//     id: rnd,
-//     title: rnd.toString(),
-//     icon: EmptyFolderIcon,
-//     type: 'folder',
-//     isOpen: false,
-//     isFocusedOnWindow: false,
-//     innerFiles: [
-//         {
-//             id: rnd2,
-//             title: rnd.toString(),
-//             icon: EmptyFolderIcon,
-//             type: 'folder',
-//             isOpen: false,
-//             isFocusedOnWindow: false,
-//             innerFiles: []
-//         }
-//     ]
-// }
 
 const Desktop = React.memo<DesktopProps>(({
                                               setOpenedAppList, openedAppList,
-                                          files, setFiles, filesTree, setLoading}) => {
-
+                                              files, setFiles, filesTree, setLoading
+                                          }) => {
 
 
     useEffect(() => {
@@ -67,7 +47,7 @@ const Desktop = React.memo<DesktopProps>(({
         setFiles(prev => {
             return prev.map(file => {
                 if (file.id === id) {
-                    return {...file, isOpen: true, isFocusedOnWindow: true}
+                    return {...file, isOpen: true, isFocusedOnWindow: true, isMinimized: false}
                 } else if (file.isFocusedOnWindow) {
                     return {...file, isFocusedOnWindow: false}
                 } else {
@@ -108,7 +88,7 @@ const Desktop = React.memo<DesktopProps>(({
             return prev.map(file => {
                 if (file.id === id && file.isOpen) {
                     return {...file, isFocusedOnWindow: true}
-                } else if (file.isFocusedOnWindow){
+                } else if (file.isFocusedOnWindow) {
                     return {...file, isFocusedOnWindow: false}
                 } else {
                     return file
@@ -128,12 +108,11 @@ const Desktop = React.memo<DesktopProps>(({
             <img className={'desktop-bg'} src={desktopBackground} alt="" onLoad={backgroundLoaded}/>
             {
                 filesTree.map(file => {
-                    return(
+                    return (
                         <File
                             key={file.id}
                             file={file}
                             onDoubleClick={onFileDblClick}
-                            onFileClose={onFileClose}
                             files={files}
                         />
                     )
@@ -150,10 +129,9 @@ const Desktop = React.memo<DesktopProps>(({
                             onFileClose={onFileClose} id={file.id}
                             onFileMinimize={onFileMinimize}
                             windowContent={<Folder onDoubleClick={onFileDblClick}
-                                                                                                                               onFileClose={onFileClose}
-                                                                                                                               innerFiles={file.innerFiles}
-                                                                                                                               files={files}
-                        />}/>
+                                                   innerFiles={file.innerFiles}
+                                                   files={files}
+                            />}/>
                     } else if (file.isOpen && file.type === 'image') {
                         return <Window
                             key={file.id}
@@ -164,7 +142,7 @@ const Desktop = React.memo<DesktopProps>(({
                             onFileMinimize={onFileMinimize}
                             id={file.id}
                             windowContent={<Image src={file.icon}/>}/>
-                    } else if (file.isOpen && file.type === 'word') {
+                    } else if (file.isOpen && file.type === 'office') {
                         return <Window
                             key={file.id}
                             file={file}
@@ -173,7 +151,17 @@ const Desktop = React.memo<DesktopProps>(({
                             onFileClose={onFileClose}
                             onFileMinimize={onFileMinimize}
                             id={file.id}
-                            windowContent={<WordFile src={file.link}/>}/>
+                            windowContent={<WordFile src={file.file}/>}/>
+                    } else if (file.isOpen && file.type === 'widget') {
+                        return <Window
+                            key={file.id}
+                            file={file}
+                            openedFilesCount={openedAppList.length}
+                            onWindowFocus={onFileWindowFocus}
+                            onFileClose={onFileClose}
+                            onFileMinimize={onFileMinimize}
+                            id={file.id}
+                            windowContent={<InstagramWidget/>}/>
                     }
                 })
             }
@@ -190,6 +178,7 @@ const DesktopStyled = styled.main`
   align-items: flex-start;
   position: relative;
   overflow: hidden;
+
   .desktop-bg {
     position: absolute;
     top: 0;

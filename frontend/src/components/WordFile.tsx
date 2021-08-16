@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
+import {baseURL} from "../api/base";
 
 interface WordFileProps {
-    src: string
+    src: string | null
 }
 
 const WordFile: React.FC<WordFileProps> = ({src}) => {
     return (
         <WordFileStyled>
-            <iframe className={'word-file'} src={'https://view.officeapps.live.com/op/embed.aspx?src=' + src} frameBorder="0"/>
+            <iframe className={'word-file'} src={'https://view.officeapps.live.com/op/embed.aspx?src=' + baseURL + src} frameBorder="0"/>
         </WordFileStyled>
     );
 };

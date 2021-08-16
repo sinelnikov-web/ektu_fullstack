@@ -2,6 +2,7 @@ import React, {useEffect, useState, MouseEvent, DragEvent, ReactElement, useRef,
 import EmptyFolderIcon from '../assets/images/empty_folder.png'
 import styled from "styled-components";
 import {FileType} from "./Desktop";
+import {baseURL} from "../api/base";
 
 interface WindowProps {
     windowContent: ReactElement,
@@ -115,7 +116,8 @@ const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, o
                 (opening ? ' opening' : '') +
                 (closing ? ' closing' : '') +
                 (file.isMinimized ? ' minimized' : '') +
-                (!isVisible ? ' hidden' : '')
+                (!isVisible ? ' hidden' : '') +
+                (file.type === 'widget' ? ' widget' : '')
             }
         >
             <div
@@ -125,22 +127,26 @@ const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, o
                 onTouchMove={catchMobileWindow}
             >
                 <div className="top-bar__left-side">
+                    <img src={baseURL + file.icon} alt="" className="window__file-icon"/>
                     <span>{file.title}</span>
                 </div>
                 <div className="top-bar__right-side">
-                    <button
+                    {file.type !== 'widget' && <><button
+                        tabIndex={0}
                         className="top-bar__btn top-bar__btn--wrap"
                         onClick={minimizeWindow}
                     >
                         <span></span>
                     </button>
+                        <button
+                            tabIndex={0}
+                            className={`top-bar__btn top-bar__btn--resize`}
+                            onClick={toggleFullScreenWindow}
+                        >
+                            <span></span>
+                        </button></>}
                     <button
-                        className="top-bar__btn top-bar__btn--resize"
-                        onClick={toggleFullScreenWindow}
-                    >
-                        <span></span>
-                    </button>
-                    <button
+                        tabIndex={0}
                         className="top-bar__btn top-bar__btn--close"
                         onClick={closeWindow}
                     >
@@ -164,7 +170,7 @@ interface FolderStyleProps {
 
 const FolderStyled = styled.div<FolderStyleProps>`
   width: ${props => props.fullScreen ? '100%' : '800px'};
-  height: ${props => props.fullScreen ? '100%' : '600px'};
+  height: ${props => props.fullScreen ? 'calc(100% - 5rem)' : '600px'};
   background-color: var(--white-color);
   position: fixed;
   top: ${props => props.fullScreen ? '0' : props.top};
@@ -174,6 +180,11 @@ const FolderStyled = styled.div<FolderStyleProps>`
   flex-direction: column;
   box-shadow: 0 0 4px black;
   transition: all 0.3s linear;
+  .window__file-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.6rem;
+  }
   &.hidden {
     display: none;
   }
@@ -221,6 +232,11 @@ const FolderStyled = styled.div<FolderStyleProps>`
   &.hold {
     display: none;
   }
+  
+  &.widget {
+    width: auto;
+    height: auto;
+  }
 
   .window__top-bar {
     width: 100%;
@@ -249,12 +265,18 @@ const FolderStyled = styled.div<FolderStyleProps>`
     background: transparent;
     position: relative;
     padding: 1rem;
-
+    &:focus {
+      background: rgba(0, 0, 0, 0.2);
+    }
     &:hover {
       background: rgba(0, 0, 0, 0.2);
     }
 
     &--close {
+      &:focus {
+        background: rgba(255, 0, 0, 1);
+        color: white;
+      }
       &:hover {
         background: rgba(255, 0, 0, 1);
         color: white;
