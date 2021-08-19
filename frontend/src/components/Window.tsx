@@ -64,20 +64,20 @@ const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, o
     }
 
     const catchMobileWindow = (e: TouchEvent<HTMLDivElement>) => {
-        onWindowFocus(id)
-        if (fullScreen) {
-            setFullScreen(false)
-        }
-        // @ts-ignore
-        windowRef.current.style.top = top + (e.touches[0].clientY - cursorY) + 'px'
-        // @ts-ignore
-        windowRef.current.style.left = left + (e.touches[0].clientX - cursorX) + 'px'
-        setTop(prev => prev + (e.touches[0].clientY - cursorY))
-        setLeft(prev => prev + (e.touches[0].clientX - cursorX))
-        setCursorX(e.touches[0].clientX)
-        setCursorY(e.touches[0].clientY)
-
-        setCaught(true)
+        // onWindowFocus(id)
+        // if (fullScreen) {
+        //     setFullScreen(false)
+        // }
+        // // @ts-ignore
+        // windowRef.current.style.top = top + (e.touches[0].clientY - cursorY) + 'px'
+        // // @ts-ignore
+        // windowRef.current.style.left = left + (e.touches[0].clientX - cursorX) + 'px'
+        // setTop(prev => prev + (e.touches[0].clientY - cursorY))
+        // setLeft(prev => prev + (e.touches[0].clientX - cursorX))
+        // setCursorX(e.touches[0].clientX)
+        // setCursorY(e.touches[0].clientY)
+        //
+        // setCaught(true)
 
     }
 
@@ -316,6 +316,12 @@ const FolderStyled = styled.div<FolderStyleProps>`
   .content {
     width: 100%;
     height: calc(100% - 3rem);
+  }
+  @media (max-width: 797px) {
+    width: 100%;
+    height: calc(100% - 5rem);
+    top: 0;
+    left: 0;
   }
 `
 

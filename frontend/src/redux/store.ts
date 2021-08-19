@@ -2,10 +2,12 @@ import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunkMiddleware from "redux-thunk"
 import {filesReducer} from "./files-reducer";
 import {activityReducer} from "./activities-reducer";
+import {weatherReducer} from "./weather-reducer";
 
 let rootReducer = combineReducers({
     files: filesReducer,
-    activities: activityReducer
+    activities: activityReducer,
+    weather: weatherReducer
 })
 
 type RootReducerType = typeof rootReducer

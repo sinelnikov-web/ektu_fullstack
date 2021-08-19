@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import WelcomeBackground from "../assets/images/welcome_bg.jpg"
+import Loader from "./Loader";
 
 interface WelcomeLoadingProps {
     isLoading: boolean
@@ -21,14 +22,7 @@ const WelcomeLoading: React.FC<WelcomeLoadingProps> = ({isLoading}) => {
                 </div>
                 <h1 className="user-name">Jambyl Oblysy</h1>
                 <div className="welcome-footer">
-                    <div className='loader'>
-                        <div className="bg"></div>
-                        <div className='circle'></div>
-                        <div className='circle'></div>
-                        <div className='circle'></div>
-                        <div className='circle'></div>
-                        <div className='circle'></div>
-                    </div>
+                    <Loader/>
                     <h2>Добро пожаловать</h2>
                 </div>
             </div>
@@ -66,6 +60,7 @@ const WelcomeLoadingStyled = styled.div`
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.3);
   }
+
   .user-image {
     width: 200px;
     height: 200px;
@@ -73,6 +68,7 @@ const WelcomeLoadingStyled = styled.div`
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
   }
+
   .user-head {
     position: absolute;
     top: 40%;
@@ -83,6 +79,7 @@ const WelcomeLoadingStyled = styled.div`
     border: 6px solid white;
     border-radius: 50%;
   }
+
   .user-body {
     position: absolute;
     top: 69%;
@@ -95,25 +92,31 @@ const WelcomeLoadingStyled = styled.div`
     border-left: 5px solid white;
     border-right: 5px solid white;
   }
+
   .user-name {
     font-weight: 300;
     font-size: 6rem;
   }
+
   .welcome-footer {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+
     h2 {
       font-weight: 300;
       font-size: 2rem;
     }
   }
+
   &.loaded {
     animation: 0.5s disappearing;
   }
+
   &.hidden {
     display: none;
   }
+
   @keyframes disappearing {
     0% {
       opacity: 1;
@@ -122,97 +125,9 @@ const WelcomeLoadingStyled = styled.div`
       opacity: 0;
     }
   }
-  
-  .loader {
-    width: 20px;
-    height: 20px;
-  }
-  
-  
-  .loader .circle {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    opacity: 0;
-    transform: rotate(225deg);
-    animation-iteration-count: infinite;
-    animation-name: orbit;
-    animation-duration: 5.5s;
-  }
 
-  .loader .circle:after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 5px;
-    background: white;
-    //box-shadow: 0 0 9px rgba(255, 255, 255, .7);
-  }
 
-  .loader .circle:nth-child(2) {
-    animation-delay: 240ms;
-  }
-
-  .loader .circle:nth-child(3) {
-    animation-delay: 480ms;
-  }
-
-  .loader .circle:nth-child(4) {
-    animation-delay: 720ms;
-  }
-
-  .loader .circle:nth-child(5) {
-    animation-delay: 960ms;
-  }
-
-  .loader .bg {
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    margin-left: -16px;
-    margin-top: -16px;
-    border-radius: 13px;
-    background: transparent;
-    animation: bgg 16087ms ease-in alternate infinite;
-  }
-
-  @keyframes orbit {
-    0% {
-      transform: rotate(225deg);
-      opacity: 1;
-      animation-timing-function: ease-out;
-    }
-    7% {
-      transform: rotate(345deg);
-      animation-timing-function: linear;
-    }
-    30% {
-      transform: rotate(455deg);
-      animation-timing-function: ease-in-out;
-    }
-    39% {
-      transform: rotate(690deg);
-      animation-timing-function: linear;
-    }
-    70% {
-      transform: rotate(815deg);
-      opacity: 1;
-      animation-timing-function: ease-out;
-    }
-    75% {
-      transform: rotate(945deg);
-      animation-timing-function: ease-out;
-    }
-    76% {
-      transform: rotate(945deg);
-      opacity: 0;
-    }
-    100% {
-      transform: rotate(945deg);
-      opacity: 0;
-    }
-  }
+}
 `
 
 export default WelcomeLoading;

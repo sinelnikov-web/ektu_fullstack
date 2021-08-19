@@ -7,8 +7,9 @@ import Folder from "./Folder";
 import Image from "./Image";
 import WordFile from "./WordFile";
 import InstagramWidget from "./InstagramWidget";
+import Browser from "./Browser";
 
-export type FileTypes = 'folder' | 'application' | 'image' | 'office' | 'widget'
+export type FileTypes = 'folder' | 'application' | 'image' | 'office' | 'widget' | 'browser'
 
 export type FileType = {
     id: number
@@ -163,6 +164,17 @@ const Desktop = React.memo<DesktopProps>(({
                             id={file.id}
                             windowContent={<InstagramWidget/>}/>
                     }
+                    else if (file.isOpen && file.type === 'browser') {
+                        return <Window
+                            key={file.id}
+                            file={file}
+                            openedFilesCount={openedAppList.length}
+                            onWindowFocus={onFileWindowFocus}
+                            onFileClose={onFileClose}
+                            onFileMinimize={onFileMinimize}
+                            id={file.id}
+                            windowContent={<Browser/>}/>
+                    }
                 })
             }
         </DesktopStyled>
@@ -171,13 +183,14 @@ const Desktop = React.memo<DesktopProps>(({
 
 const DesktopStyled = styled.main`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
   height: calc(100% - 5rem);
   padding: 1rem;
-  align-items: flex-start;
   position: relative;
   overflow: hidden;
+  align-content: flex-start;
 
   .desktop-bg {
     position: absolute;

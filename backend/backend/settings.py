@@ -31,6 +31,7 @@ MAIN_URL = 'http://127.0.0.1:8000'
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'frontend',
 ]
+
+USE_I18N = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,3 +133,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+gettext = lambda s: s  # noqa
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
+
+LANGUAGES = [
+    ('ru', gettext('Russian')),
+    ('kk', gettext('Kazakh')),
+    ('en', gettext('English')),
+]

@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getFilesTree} from "./redux/files-reducer";
 import {filesTreeSelector} from "./selectors/files-selectors";
 import {getActivities} from "./redux/activities-reducer";
+import {getWeather} from "./redux/weather-reducer";
 
 function App() {
     const [openedAppList, setOpenedAppList] = useState<FileType[]>([])
@@ -25,6 +26,7 @@ function App() {
     useEffect(() => {
         dispatch(getFilesTree())
         dispatch(getActivities())
+        dispatch(getWeather())
     }, [])
     useEffect(() => {
         if (filesTree.length > files.length) {

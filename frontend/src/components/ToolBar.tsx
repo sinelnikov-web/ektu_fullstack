@@ -10,6 +10,7 @@ import {FileType} from "./Desktop";
 import LazyImage from "./LazyImage/LazyImage";
 import {baseURL} from "../api/base";
 import ToolbarSearch from "./ToolbarSearch";
+import ToolbarWeather from "./ToolbarWeather";
 
 interface ToolBarProps {
     openedAppList: Array<FileType>
@@ -53,6 +54,9 @@ const ToolBar = React.memo<ToolBarProps>(({openedAppList, setFiles, files, setOp
                 })}
             </div>
             <div className="toolbar__right-side">
+                <ToolbarAdditionalIcon>
+                    <ToolbarWeather/>
+                </ToolbarAdditionalIcon>
                 <ToolbarAdditionalIcon>
                     <ArrowUp className={'toolbar__arrow'}/>
                 </ToolbarAdditionalIcon>

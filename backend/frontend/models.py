@@ -1,4 +1,9 @@
+import sys
+from io import BytesIO
+
+from PIL import Image
 from django.conf import settings
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 
 
@@ -10,6 +15,7 @@ class File(models.Model):
         ('image', 'image'),
         ('office', 'office'),
         ('widget', 'widget'),
+        ('browser', 'browser'),
     ]
     title = models.CharField(max_length=255)
     icon = models.ImageField(upload_to='images')
@@ -30,6 +36,7 @@ class File(models.Model):
 
     def __str__(self):
         return self.title
+
 
 
 class Activity(models.Model):
