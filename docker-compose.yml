@@ -21,6 +21,8 @@ services:
       - postgres
     ports:
       - "8000:8000"
+    entrypoint:
+      - ./entrypoint.sh
   nginx:
     build:
       context: docker/nginx
