@@ -11,8 +11,12 @@ interface FileProps {
     file: FileType
 }
 
-const File = React.memo<FileProps>(({onDoubleClick= () => {},
-                                       files, file, onClick=()=>{}}) => {
+const File = React.memo<FileProps>(({
+                                        onDoubleClick = () => {
+                                        },
+                                        files, file, onClick = () => {
+    }
+                                    }) => {
 
     const [isFocused, setIsFocused] = useState(false)
 
@@ -30,10 +34,10 @@ const File = React.memo<FileProps>(({onDoubleClick= () => {},
 
     })
 
-    const dragStart = (e:React.DragEvent<HTMLDivElement>) => {
+    const dragStart = (e: React.DragEvent<HTMLDivElement>) => {
         e.currentTarget.classList.add('hold')
     }
-    const dragEnd = (e:React.DragEvent<HTMLDivElement>) => {
+    const dragEnd = (e: React.DragEvent<HTMLDivElement>) => {
         e.currentTarget.classList.remove('hold')
     }
     return (
@@ -63,12 +67,13 @@ const FileStyled = styled.div`
   display: block;
   text-align: center;
   max-width: 7rem;
-  
+
   .file:hover {
     &:hover {
       background: rgba(255, 255, 255, 0.2);
     }
   }
+
   .file__icon {
     cursor: pointer;
     display: flex;
@@ -76,12 +81,14 @@ const FileStyled = styled.div`
     align-items: center;
     margin-bottom: 0.5rem;
     padding: 0.5rem;
+
     img {
       width: 6rem;
       height: 6rem;
       object-fit: cover;
     }
   }
+
   .file__title {
     color: var(--white-color);
     font-size: 1.2rem;

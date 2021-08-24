@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { lighten } from 'polished'
+import {lighten} from 'polished'
 
 interface ToolbarMainIconProps {
     isActive: boolean
@@ -12,7 +12,7 @@ const ToolbarMainIcon: React.FC<ToolbarMainIconProps> = ({children, isActive, on
     return (
         <ToolbarMainIconStyled
             tabIndex={0}
-            onKeyUp={(e) => e.code ==='Enter' ? onClick(appId) : null}
+            onKeyUp={(e) => e.code === 'Enter' ? onClick(appId) : null}
             onClick={() => onClick(appId)}
             className={'toolbar__icon' + (isActive ? ' active' : '')}>
             {children}
@@ -49,6 +49,10 @@ const ToolbarMainIconStyled = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  
+  @media (max-width: 340px) {
+    width: 3.5rem;
   }
 `
 

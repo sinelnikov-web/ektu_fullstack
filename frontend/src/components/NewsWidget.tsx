@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {weatherStateSelector} from "../selectors/weather-selectors";
+import {articlesSelector} from "../selectors/news-selectors";
+import {baseURL} from "../api/base";
+import LazyImage from "./LazyImage/LazyImage";
+import Article from "./Article";
 
 interface NewsWidgetProps {
     isOpen: boolean
@@ -9,105 +13,17 @@ interface NewsWidgetProps {
 
 const NewsWidget: React.FC<NewsWidgetProps> = ({isOpen}) => {
 
-    const weather = useSelector(weatherStateSelector)
+    const articles = useSelector(articlesSelector)
 
     return (
         <NewsWidgetStyled className={!isOpen ? 'hidden' : ''}>
-            <div className="news__head">
-                <div className="news__post">
-                    <img src={'http://placehold.it/900x900'} alt="" className="news__post-image"/>
-                    <div className="news__post-info">
-                        <h2 className="news__post-title">Жамбылская новость</h2>
-                        <div className="news__post-footer">
-                            <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                            <span className="news__post-likes">23&#10084;</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="news__weather">
-                    <h2 className="news__weather-city">{weather.name}, Жамбылская область</h2>
-                    <div className="news__weather-body">
-                        <img src={`http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`} alt=""
-                             className="news__weather-image"/>
-                        <span className="news__weather-degrees">{(weather?.main?.temp - 273).toFixed()}&deg;C</span>
-                    </div>
-                    <div className="news__weather-footer">
-                        <div className="news__weather-item">
-                            <p className="news__weather-key">Давление:</p>
-                            <p className="news__weather-value">{weather.main.pressure}</p>
-                        </div>
-                        <div className="news__weather-item">
-                            <p className="news__weather-key">Влажность:</p>
-                            <p className="news__weather-value">{weather.main.humidity}</p>
-                        </div>
-                        <div className="news__weather-item">
-                            <p className="news__weather-key">Чувствуется как:</p>
-                            <p className="news__weather-value">{weather.main.feels_like}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="news__body">
-                <div className="news__post">
-                    <img src={'http://placehold.it/900x900'} alt="" className="news__post-image"/>
-                    <div className="news__post-info">
-                        <h2 className="news__post-title">Жамбылская новость</h2>
-                        <div className="news__post-footer">
-                            <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                            <span className="news__post-likes">23&#10084;</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="news__post">
-                    <img src={'http://placehold.it/900x900'} alt="" className="news__post-image"/>
-                    <div className="news__post-info">
-                        <h2 className="news__post-title">Жамбылская новость</h2>
-                        <div className="news__post-footer">
-                            <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                            <span className="news__post-likes">23&#10084;</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="news__post">
-                    <img src={'http://placehold.it/900x900'} alt="" className="news__post-image"/>
-                    <div className="news__post-info">
-                        <h2 className="news__post-title">Жамбылская новость</h2>
-                        <div className="news__post-footer">
-                            <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                            <span className="news__post-likes">23&#10084;</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="news__post">
-                    <img src={'http://placehold.it/900x900'} alt="" className="news__post-image"/>
-                    <div className="news__post-info">
-                        <h2 className="news__post-title">Жамбылская новость</h2>
-                        <div className="news__post-footer">
-                            <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                            <span className="news__post-likes">23&#10084;</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="news__post">
-                    <img src={'http://placehold.it/900x900'} alt="" className="news__post-image"/>
-                    <div className="news__post-info">
-                        <h2 className="news__post-title">Жамбылская новость</h2>
-                        <div className="news__post-footer">
-                            <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                            <span className="news__post-likes">23&#10084;</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="news__post">
-                    <img src={'http://placehold.it/900x900'} alt="" className="news__post-image"/>
-                    <div className="news__post-info">
-                        <h2 className="news__post-title">Жамбылская новость</h2>
-                        <div className="news__post-footer">
-                            <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                            <span className="news__post-likes">23&#10084;</span>
-                        </div>
-                    </div>
-                </div>
+            <div className="news">
+                {articles.map(article => {
+                    return (
+                        <Article key={article.id} article={article}/>
+                    )
+                })}
+
             </div>
         </NewsWidgetStyled>
     );
@@ -118,7 +34,7 @@ const NewsWidgetStyled = styled.div`
   width: 600px;
   position: absolute;
   top: -1300%;
-  left: -325%;
+  left: -100%;
   background-color: #4C4C4C;
   padding: 2rem;
   overflow-y: auto;
@@ -140,27 +56,21 @@ const NewsWidgetStyled = styled.div`
     }
   }
 
-  .news__head, .news__body {
+  .news {
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
   }
 
-  .news__body {
-    flex-wrap: wrap;
-    padding-top: 1rem;
-  }
-
-  .news__head > *, .news__body > * {
-    border-radius: 10px;
-    box-shadow: 0 0 3px black;
-  }
 
   .news__post {
-    width: 49%;
+    width: 95%;
     height: 25rem;
     background-color: black;
     overflow: hidden;
     position: relative;
+    transition: height 0.3s linear;
 
     &:hover {
       .news__post-image {
@@ -176,8 +86,7 @@ const NewsWidgetStyled = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8));
-
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.9));
 
   }
 
@@ -199,6 +108,7 @@ const NewsWidgetStyled = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     z-index: 222;
+
   }
 
   .news__post-title {
@@ -206,10 +116,58 @@ const NewsWidgetStyled = styled.div`
     font-weight: 400;
   }
 
+  .news__post.active {
+    height: auto;
+
+    &:hover {
+      .news__post-image {
+        transform: scale(1);
+      }
+    }
+
+    .news__post-image {
+      height: 25rem;
+      transition: none;
+    }
+
+    .news__post-info {
+      position: relative;
+    }
+
+    .news__post-title {
+      border-bottom: 1px solid white;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .news__post-text {
+      opacity: 1;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .news__post-text {
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+
   .news__post-footer {
     display: flex;
     margin-top: 1rem;
     align-items: center;
+    justify-content: space-between;
+  }
+
+  .news__post-button {
+    color: white;
+    padding: 0.8rem 2rem;
+    background-color: #4B4843;
+    border: none;
+    border-radius: 20px;
+    margin-right: 1rem;
+    cursor: pointer;
   }
 
   .news__post-like {
@@ -230,42 +188,43 @@ const NewsWidgetStyled = styled.div`
     }
   }
 
-  .news__weather {
-    width: 50%;
-    height: 25rem;
-    background: linear-gradient(125deg, rgba(65, 65, 66, 1) 0%, rgba(51, 59, 61, 1) 27%, rgba(38, 54, 58, 1) 100%);
-    padding: 2rem;
-  }
-
-  .news__weather-city {
-    font-size: 1.6rem;
-    font-weight: 400;
-  }
-
-  .news__weather-body {
-    display: flex;
-    align-items: center;
-    font-size: 4.5rem;
-  }
-
-  .news__weather-image {
-    margin-left: -2.5rem;
-  }
-
-  .news__weather-item {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid white;
-    margin-bottom: 0.5rem;
-  }
-
-  @media (max-width: 997px) {
+  @media (max-width: 823px) {
     position: fixed;
-    width: 98%;
+    width: 100%;
     height: calc(100vh - 5rem);
     top: 0;
     left: 0;
+    .news__post-footer {
+      flex-direction: column;
+      width: 100%;
+      gap: 1rem;
+
+      > div {
+        width: 100%;
+      }
+    }
+
+    .news__post-like {
+      width: 100%;
+      padding: 0.5rem 0.7rem;
+
+      span {
+        font-size: 1.5rem;
+      }
+    }
+
+    .news__post-likes {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: black;
+      padding: 0.3rem 1rem;
+      border-radius: 5px;
+    }
+
+    .news__post-button {
+      width: 100%;
+    }
   }
 
 `

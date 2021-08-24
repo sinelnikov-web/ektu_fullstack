@@ -1,19 +1,19 @@
 from django.contrib import admin
-
+from modeltranslation.admin import TranslationAdmin
 # Register your models here.
 from django.utils.safestring import mark_safe
-from frontend.models import File, Activity
-
+from frontend.models import File, Activity, Article
 
 
 class FileInline(admin.StackedInline):
     model = File
     extra = 1
 
+
 @admin.register(File)
-class FileAdmin(admin.ModelAdmin):
+class FileAdmin(TranslationAdmin):
     list_display = ['title', 'id', 'image_preview', 'type', 'link', 'parent']
-    inlines = [FileInline,]
+    inlines = [FileInline, ]
 
     def parent(self, obj):
         return obj.parent.title
@@ -28,5 +28,10 @@ class FileAdmin(admin.ModelAdmin):
 
 
 @admin.register(Activity)
-class ActivityAdmin(admin.ModelAdmin):
+class ActivityAdmin(TranslationAdmin):
     list_display = ['title', 'id', 'description']
+
+
+@admin.register(Article)
+class ArticleAdmin(TranslationAdmin):
+    list_display = ['title', 'id', 'text']

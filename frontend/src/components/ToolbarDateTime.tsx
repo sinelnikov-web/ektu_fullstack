@@ -43,7 +43,7 @@ const ToolbarDateTime = () => {
     }, [seconds])
 
     return (
-        <ToolbarDateTimeStyled>
+        <ToolbarDateTimeStyled className={'toolbar-datetime'}>
             <div className="toolbar-icon-wrapper">
                 <time tabIndex={0} onKeyUp={(e) => e.code === 'Enter' ? setShowCalendar(!showCalendar) : null}
                       className={'toolbar-icon'} dateTime={'20'} onClick={() => setShowCalendar(prev => !prev)}>
@@ -65,10 +65,12 @@ const ToolbarDateTimeStyled = styled.div`
   text-align: center;
   width: 100%;
   height: 100%;
+
   .toolbar-icon-wrapper {
     padding: 0.5rem 0.5rem;
     width: 100%;
     height: 100%;
+
     &:hover {
       background-color: var(--toolbar-bg-color);
       filter: brightness(140%);

@@ -105,7 +105,7 @@ const Desktop = React.memo<DesktopProps>(({
     }
 
     return (
-        <DesktopStyled>
+        <DesktopStyled className={'desktop'}>
             <img className={'desktop-bg'} src={desktopBackground} alt="" onLoad={backgroundLoaded}/>
             {
                 filesTree.map(file => {
@@ -142,7 +142,7 @@ const Desktop = React.memo<DesktopProps>(({
                             onFileClose={onFileClose}
                             onFileMinimize={onFileMinimize}
                             id={file.id}
-                            windowContent={<Image src={file.icon}/>}/>
+                            windowContent={<Image src={file.file}/>}/>
                     } else if (file.isOpen && file.type === 'office') {
                         return <Window
                             key={file.id}
@@ -163,8 +163,7 @@ const Desktop = React.memo<DesktopProps>(({
                             onFileMinimize={onFileMinimize}
                             id={file.id}
                             windowContent={<InstagramWidget/>}/>
-                    }
-                    else if (file.isOpen && file.type === 'browser') {
+                    } else if (file.isOpen && file.type === 'browser') {
                         return <Window
                             key={file.id}
                             file={file}
@@ -198,6 +197,20 @@ const DesktopStyled = styled.main`
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    transform-origin: center center;
+  }
+
+  &:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
     z-index: -1;
   }
 `

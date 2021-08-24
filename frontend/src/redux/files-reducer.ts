@@ -22,8 +22,6 @@ export const filesReducer = (state = initialState, action: ActionType): InitialS
     }
 }
 
-
-
 export const getFilesTree = () => async (dispatch: Dispatch) => {
     const response = await filesAPI.getFilesTree()
     dispatch(getFilesTreeSuccess(response))

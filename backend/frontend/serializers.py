@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from frontend.models import File, Activity
+from frontend.models import File, Activity, Article, Like
 
 class RecursiveField(serializers.Serializer):
     def to_representation(self, value):
@@ -20,4 +20,12 @@ class ActivitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Activity
+        fields = '__all__'
+
+
+
+class ArticleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Article
         fields = '__all__'

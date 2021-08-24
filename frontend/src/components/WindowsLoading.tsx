@@ -35,12 +35,15 @@ const WindowsLoadingStyled = styled.div`
   background-color: #0077d3;
   z-index: 10000;
   transition: opacity 0.4s linear;
+
   &.loaded {
     animation: 0.5s disappearing;
   }
+
   &.hidden {
     display: none;
   }
+
   @keyframes disappearing {
     from {
       opacity: 1;
@@ -49,6 +52,7 @@ const WindowsLoadingStyled = styled.div`
       opacity: 0;
     }
   }
+
   h1 {
     color: white;
     position: absolute;
@@ -58,6 +62,7 @@ const WindowsLoadingStyled = styled.div`
     font-weight: 300;
     text-align: center;
   }
+
   .loader {
     position: absolute;
     top: 50%;

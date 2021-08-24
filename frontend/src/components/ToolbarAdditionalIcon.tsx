@@ -21,7 +21,7 @@ const ToolbarAdditionalIconStyled = styled.div`
   align-items: center;
   font-size: 1.5rem;
   cursor: default;
-  
+
   svg {
     width: 55%;
     height: 100%;

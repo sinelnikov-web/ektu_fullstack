@@ -2,20 +2,20 @@
 import uuid from 'react-uuid'
 import {DayType} from "../components/Calendar";
 
-export function getMonthOffsetList (date: Date) {
+export function getMonthOffsetList(date: Date) {
     let monthlist: Array<number> = []
-    for(let i = 0; i < 12; i++) {
+    for (let i = 0; i < 12; i++) {
         const curDate = new Date(date.getFullYear(), i, 0).getDate()
         const firstDay = new Date(date.getFullYear(), i - 1, 1).getDay()
         if (i === 0) {
             monthlist.push(0)
         } else {
             if (curDate === 31 && [5, 6, 0].includes(firstDay)) {
-                monthlist.push(monthlist[i-1] + 200)
+                monthlist.push(monthlist[i - 1] + 200)
             } else if (curDate === 30 && [6, 0].includes(firstDay)) {
-                monthlist.push(monthlist[i-1] + 200)
+                monthlist.push(monthlist[i - 1] + 200)
             } else {
-                monthlist.push(monthlist[i-1] + 160)
+                monthlist.push(monthlist[i - 1] + 160)
             }
         }
     }
@@ -28,7 +28,7 @@ export function getDayList(date: Date) {
     let week = 0
     dayList.push([])
     for (let i = 0; i < 12; i++) {
-        for (let j = 1; j <= new Date(date.getFullYear(), i+1, 0).getDate(); j++) {
+        for (let j = 1; j <= new Date(date.getFullYear(), i + 1, 0).getDate(); j++) {
             let day = {
                 id: uuid(),
                 dayNumber: j,
@@ -78,5 +78,5 @@ export function currentTime() {
     const currentMinutes = currentDate.getMinutes().toString()
     const currentSeconds = currentDate.getSeconds().toString()
 
-    return {currentDate, currentYear, currentMonth, currentDay ,currentHours, currentMinutes, currentSeconds}
+    return {currentDate, currentYear, currentMonth, currentDay, currentHours, currentMinutes, currentSeconds}
 }

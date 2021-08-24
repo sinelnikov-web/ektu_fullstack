@@ -119,14 +119,13 @@ const Calendar: React.FC<CalendarProps> = ({
                                             if (day.dayNumber) {
                                                 const currentDate = new Date(date.getFullYear(), day.monthNumber, day.dayNumber, 12)
                                                 const isActive = currentDate.toISOString() === activeDay.toISOString()
-                                                if (day.monthNumber === 7) {
-                                                    console.log(currentDate, activeDay)
-                                                }
                                                 const equalDates = activities.filter(activity => activity.date.split('T')[0] === currentDate.toISOString().split('T')[0])
                                                 const equalExist = equalDates.length !== 0
 
                                                 return (
-                                                    <div tabIndex={0} onClick={() => onDayClick(currentDate)} key={day.id} className={"calendar__table-item" + (equalExist ? ' active' : '') + (isActive ? ' selected' : '')}>
+                                                    <div tabIndex={0} onClick={() => onDayClick(currentDate)}
+                                                         key={day.id}
+                                                         className={"calendar__table-item" + (equalExist ? ' active' : '') + (isActive ? ' selected' : '')}>
                                                         <span>{day.dayNumber}</span>
                                                     </div>
                                                 )
@@ -273,12 +272,15 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
     justify-content: center;
     align-items: center;
     background-color: #233339;
+
     &.active {
       border: 1px solid red;
     }
+
     &.selected {
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
+
     &.other-month {
       color: rgba(255, 255, 255, 0.4);
     }
@@ -312,6 +314,24 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
       text-align: left;
       max-height: 160px;
       overflow-y: auto;
+    }
+  }
+
+  @media (max-width: 823px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 5rem);
+    overflow-y: auto;
+    .calendar__top {
+      max-width: 336px;
+      margin: 0 auto;
+    }
+
+    .calendar__bottom {
+      display: flex;
+      justify-content: center;
     }
   }
 `

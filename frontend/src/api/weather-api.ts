@@ -1,4 +1,3 @@
-import {APIInstance} from "./base";
 import axios from "axios";
 
 type WeatherResponseType = {
@@ -49,6 +48,6 @@ type WeatherResponseType = {
 
 export const weatherApi = {
     getWeather: (city: string) => {
-            return axios.get<WeatherResponseType>(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ru&appid=a872f78cae30a043d03c0f3f5aa46bbd`).then(r => r.data)
+        return axios.get<WeatherResponseType>(`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ru&appid=a872f78cae30a043d03c0f3f5aa46bbd`).then(r => r.data)
     },
 }

@@ -1,5 +1,4 @@
-import React, {useEffect, useState, MouseEvent, DragEvent, ReactElement, useRef, TouchEvent} from 'react';
-import EmptyFolderIcon from '../assets/images/empty_folder.png'
+import React, {DragEvent, MouseEvent, ReactElement, TouchEvent, useRef, useState} from 'react';
 import styled from "styled-components";
 import {FileType} from "./Desktop";
 import {baseURL} from "../api/base";
@@ -14,7 +13,15 @@ interface WindowProps {
     openedFilesCount: number
 }
 
-const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, onWindowFocus, openedFilesCount, onFileMinimize}) => {
+const Window = React.memo<WindowProps>(({
+                                            windowContent,
+                                            onFileClose,
+                                            id,
+                                            file,
+                                            onWindowFocus,
+                                            openedFilesCount,
+                                            onFileMinimize
+                                        }) => {
     const [topBarMouseDown, setTopBarMouseDown] = useState(false)
     const [caught, setCaught] = useState(false)
     const [top, setTop] = useState(50 + openedFilesCount * 10)
@@ -53,7 +60,6 @@ const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, o
         } else {
             e.preventDefault()
         }
-
     }
 
     const throwWindow = (e: DragEvent<HTMLDivElement>) => {
@@ -131,20 +137,22 @@ const Window = React.memo<WindowProps>(({windowContent, onFileClose, id, file, o
                     <span>{file.title}</span>
                 </div>
                 <div className="top-bar__right-side">
-                    {file.type !== 'widget' && <><button
-                        tabIndex={0}
-                        className="top-bar__btn top-bar__btn--wrap"
-                        onClick={minimizeWindow}
-                    >
-                        <span></span>
-                    </button>
+                    {file.type !== 'widget' && <>
+                        <button
+                            tabIndex={0}
+                            className="top-bar__btn top-bar__btn--wrap"
+                            onClick={minimizeWindow}
+                        >
+                            <span></span>
+                        </button>
                         <button
                             tabIndex={0}
                             className={`top-bar__btn top-bar__btn--resize`}
                             onClick={toggleFullScreenWindow}
                         >
                             <span></span>
-                        </button></>}
+                        </button>
+                    </>}
                     <button
                         tabIndex={0}
                         className="top-bar__btn top-bar__btn--close"
@@ -169,8 +177,8 @@ interface FolderStyleProps {
 }
 
 const FolderStyled = styled.div<FolderStyleProps>`
-  width: ${props => props.fullScreen ? '100%' : '800px'};
-  height: ${props => props.fullScreen ? 'calc(100% - 5rem)' : '600px'};
+  width: ${props => props.fullScreen ? '100vw' : '800px'};
+  height: ${props => props.fullScreen ? 'calc(100vh - 5rem)' : '600px'};
   background-color: var(--white-color);
   position: fixed;
   top: ${props => props.fullScreen ? '0' : props.top};
@@ -180,29 +188,38 @@ const FolderStyled = styled.div<FolderStyleProps>`
   flex-direction: column;
   box-shadow: 0 0 4px black;
   transition: all 0.3s linear;
+
   .window__file-icon {
     width: 16px;
     height: 16px;
     margin-right: 0.6rem;
   }
+
   &.hidden {
     display: none;
   }
+
   &.opening {
     animation: 0.5s openWindow;
   }
+
   &.closing {
     animation: 0.5s closeWindow;
     opacity: 0;
   }
+
   &.minimized {
     transform-origin: bottom;
     animation: 0.5s minimizeWindow;
     opacity: 0;
     width: 0;
     height: 0;
+
+    > * {
+      display: none;
+    }
   }
-  
+
   @keyframes openWindow {
     from {
       transform: scale(0);
@@ -229,10 +246,11 @@ const FolderStyled = styled.div<FolderStyleProps>`
       transform: scale(0);
     }
   }
+
   &.hold {
     display: none;
   }
-  
+
   &.widget {
     width: auto;
     height: auto;
@@ -244,7 +262,7 @@ const FolderStyled = styled.div<FolderStyleProps>`
     display: flex;
     justify-content: space-between;
   }
-  
+
   .top-bar__left-side {
     font-size: 1.5rem;
     display: flex;
@@ -265,9 +283,11 @@ const FolderStyled = styled.div<FolderStyleProps>`
     background: transparent;
     position: relative;
     padding: 1rem;
+
     &:focus {
       background: rgba(0, 0, 0, 0.2);
     }
+
     &:hover {
       background: rgba(0, 0, 0, 0.2);
     }
@@ -277,6 +297,7 @@ const FolderStyled = styled.div<FolderStyleProps>`
         background: rgba(255, 0, 0, 1);
         color: white;
       }
+
       &:hover {
         background: rgba(255, 0, 0, 1);
         color: white;
@@ -317,7 +338,8 @@ const FolderStyled = styled.div<FolderStyleProps>`
     width: 100%;
     height: calc(100% - 3rem);
   }
-  @media (max-width: 797px) {
+
+  @media (max-width: 823px) {
     width: 100%;
     height: calc(100% - 5rem);
     top: 0;

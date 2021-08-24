@@ -3,14 +3,14 @@ import styled from "styled-components";
 import {baseURL} from "../api/base";
 
 interface ImageProps {
-    src: string
+    src: string | null
 }
 
 const Image: React.FC<ImageProps> = ({src}) => {
 
     let [scale, setScale] = useState(1)
 
-    const scaleImage = (e:WheelEvent<HTMLDivElement>) => {
+    const scaleImage = (e: WheelEvent<HTMLDivElement>) => {
 
         let currentScale = e.deltaY * -0.001
 
@@ -32,6 +32,7 @@ const ImageStyled = styled.div<ImageStyledProps>`
   height: 100%;
   padding: 2rem;
   overflow: hidden;
+
   img {
     width: 100%;
     height: 100%;

@@ -12,7 +12,7 @@ const InstagramWidget = () => {
 };
 
 const InstagramWidgetStyled = styled.div`
-  
+
   z-index: 50;
   width: 300px;
   height: 480px;

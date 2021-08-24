@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import {FileType, FileTypes} from "./Desktop";
 import File from "./File";
-import Window from "./Window";
 
 interface FolderProps {
     innerFiles: Array<FileType>
@@ -11,12 +10,11 @@ interface FolderProps {
 }
 
 
-
-const Folder:React.FC<FolderProps> = ({innerFiles, onDoubleClick, files}) => {
+const Folder: React.FC<FolderProps> = ({innerFiles, onDoubleClick, files}) => {
     return (
         <FolderStyled className={'folder'}>
             {innerFiles.map(file => {
-                return(
+                return (
                     <File
                         key={file.id}
                         onDoubleClick={onDoubleClick}
@@ -35,16 +33,18 @@ const FolderStyled = styled.div`
   background: var(--white-color);
   display: flex;
   padding: 1rem;
+
   .file:hover {
-    background: rgba(0, 0, 0, 0.2)!important;
+    background: rgba(0, 0, 0, 0.2) !important;
   }
+
   .file__title {
     text-align: center;
     color: black;
     text-shadow: none;
     font-weight: 400;
   }
-  
+
 `
 
 export default Folder;

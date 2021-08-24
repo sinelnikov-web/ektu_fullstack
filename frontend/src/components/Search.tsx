@@ -39,8 +39,8 @@ const Search: React.FC<SearchProps> = ({files, setFiles, className, setOpenSearc
             <div className="search__body">
                 {files.map(file => file.title.toLowerCase().includes(query.toLowerCase())
                     ?
-                    <div className={"search__result"}><File onClick={onFileClick} key={file.id} file={file} files={files}  /></div>
-                    : <div className={"search__result hidden"}><File onClick={onFileClick} key={file.id} file={file} files={files}  /></div>)}
+                    <div key={file.id} className={"search__result"}><File onClick={onFileClick} file={file} files={files}  /></div>
+                    : <div key={file.id} className={"search__result hidden"}><File onClick={onFileClick} file={file} files={files}  /></div>)}
             </div>
             <div className="search__footer">
                 <div className="search__field">
@@ -124,6 +124,13 @@ const SearchStyled = styled.div`
     &::placeholder {
       color: black;
     }
+  }
+  @media (max-width: 823px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 5rem);
   }
 `
 

@@ -1,13 +1,39 @@
 import sys
 from io import BytesIO
 
-from PIL import Image
+from PIL import Image, ImageOps
 from django.conf import settings
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
-
+from django.core.files import File as DjangoFile
 
 # Create your models here.
+from imagekit.models import ProcessedImageField
+from pilkit.processors import ResizeToFill
+
+from .utils import compress
+
+
+class Article(models.Model):
+    title = models.CharField(max_length=500)
+    icon = models.ImageField(upload_to='articles/%Y/%m/%d/', default=None)
+    text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    views = models.PositiveIntegerField(default=0)
+    likes_count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+
+
+class Like(models.Model):
+    ip = models.CharField(max_length=255)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='likes')
+
 
 class File(models.Model):
     FILE_TYPE_CHOICES = [
@@ -18,7 +44,10 @@ class File(models.Model):
         ('browser', 'browser'),
     ]
     title = models.CharField(max_length=255)
-    icon = models.ImageField(upload_to='images')
+    icon = ProcessedImageField(upload_to='images',
+                                           processors=[ResizeToFill(300, 300)],
+                                           format='JPEG',
+                                           options={'quality': 80})
     type = models.CharField(max_length=255, choices=FILE_TYPE_CHOICES)
     isOpen = models.BooleanField(default=False)
     isFocusedOnWindow = models.BooleanField(default=False)

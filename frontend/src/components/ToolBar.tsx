@@ -11,6 +11,7 @@ import LazyImage from "./LazyImage/LazyImage";
 import {baseURL} from "../api/base";
 import ToolbarSearch from "./ToolbarSearch";
 import ToolbarWeather from "./ToolbarWeather";
+import ToolbarLanguage from "./ToolbarLanguage";
 
 interface ToolBarProps {
     openedAppList: Array<FileType>
@@ -34,9 +35,8 @@ const ToolBar = React.memo<ToolBarProps>(({openedAppList, setFiles, files, setOp
             })
         })
     }
-    console.log(openedAppList)
     return (
-        <ToolBarStyled>
+        <ToolBarStyled className={'toolbar'}>
             <div className="toolbar__left-side">
                 <ToolbarMainIcon appId={-1} onClick={onFileMaximize} isActive={false}>
                     <StartUpIcon className={'startup-icon'}/>
@@ -48,7 +48,7 @@ const ToolBar = React.memo<ToolBarProps>(({openedAppList, setFiles, files, setOp
                     return (
                         <ToolbarMainIcon appId={app.id} onClick={onFileMaximize} isActive={app.isFocusedOnWindow}
                                          key={app.id}>
-                            <LazyImage src={baseURL + app.icon} alt=""/>
+                            <LazyImage src={baseURL + app.icon} alt="" cn={'toolbar-image'}/>
                         </ToolbarMainIcon>
                     )
                 })}
@@ -58,10 +58,12 @@ const ToolBar = React.memo<ToolBarProps>(({openedAppList, setFiles, files, setOp
                     <ToolbarWeather/>
                 </ToolbarAdditionalIcon>
                 <ToolbarAdditionalIcon>
-                    <ArrowUp className={'toolbar__arrow'}/>
+                    <div className="toolbar-icon-wrapper">
+                        <ArrowUp className={'toolbar__arrow'}/>
+                    </div>
                 </ToolbarAdditionalIcon>
                 <ToolbarAdditionalIcon>
-                    <VolumeIcon className={'toolbar__volume'}/>
+                    <ToolbarLanguage/>
                 </ToolbarAdditionalIcon>
                 <ToolbarAdditionalIcon>
                     <ToolbarDateTime/>
@@ -100,6 +102,9 @@ const ToolBarStyled = styled.div`
   .startup-icon {
     width: 2rem;
     height: 2rem;
+  }
+  @media (max-width: 767px) {
+
   }
 `
 

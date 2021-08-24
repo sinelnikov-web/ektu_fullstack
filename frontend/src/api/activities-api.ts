@@ -1,5 +1,4 @@
 import {APIInstance} from "./base";
-import {FileType} from "../components/Desktop";
 
 export type ActivityType = {
     id: number,
@@ -10,6 +9,10 @@ export type ActivityType = {
 
 export const activitiesAPI = {
     getActivities: () => {
-        return APIInstance.get<Array<ActivityType>>('activities').then(r => r.data)
+        return APIInstance.get<Array<ActivityType>>('activities', {
+            headers: {
+                'Accept-Language': localStorage.getItem('currentLanguage')
+            }
+        }).then(r => r.data)
     }
 }

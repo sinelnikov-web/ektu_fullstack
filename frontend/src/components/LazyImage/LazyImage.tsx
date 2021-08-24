@@ -7,10 +7,13 @@ interface LazyImageProps {
     alt: string
     onLoad?: () => void
     width?: string
-    height?: string
+    height?: string,
+    cn?: string
 }
 
-const LazyImage = React.memo<LazyImageProps>(({src, alt='', onLoad=() => {}, width='100%', height='100%'}) => {
+const LazyImage = React.memo<LazyImageProps>(({src, alt='',
+                                                  onLoad=() => {}, width='100%',
+                                                  height='100%', cn=''}) => {
 
     const [isLoaded, setIsLoaded] = useState(false)
 
@@ -19,7 +22,7 @@ const LazyImage = React.memo<LazyImageProps>(({src, alt='', onLoad=() => {}, wid
     const isVisible = useOnScreen(containerRef, '100px')
 
     return (
-        <div ref={containerRef} className={'toolbar-image ' + styles.container + (isLoaded ? ` ${styles.containerLoaded}` : '')}>
+        <div ref={containerRef} className={styles.container + (isLoaded ? ` ${styles.containerLoaded}` : '') + (cn ? ` ${cn}` : '')}>
             {(isVisible || isLoaded) && <img
                 ref={imageRef}
                 onLoad={() => isVisible ? setIsLoaded(true) : null}

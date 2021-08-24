@@ -9,7 +9,7 @@ interface ImageFileProps {
 const ImageFile: React.FC<ImageFileProps> = ({src, title}) => {
     return (
         <ImageFileStyled>
-            
+
         </ImageFileStyled>
     );
 };
