@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Window from "./Window";
 import File from "./File";
 import styled from "styled-components";
-import desktopBackground from "../assets/images/desktop_bg.jpg"
+import desktopBackground from "../assets/images/desktop_bg3.jpg"
 import Folder from "./Folder";
 import Image from "./Image";
 import WordFile from "./WordFile";
@@ -193,7 +193,7 @@ const DesktopStyled = styled.main`
   position: relative;
   overflow: hidden;
   align-content: flex-start;
-
+  z-index: 3;
   .desktop-bg {
     position: absolute;
     top: 0;

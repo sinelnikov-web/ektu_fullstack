@@ -93,7 +93,7 @@ const AppStyled = styled.div`
   max-height: 100vh;
   height: 100vh;
   position: relative;
-
+  background: #0077d3 no-repeat center center;
   * {
     user-select: none;
   }
