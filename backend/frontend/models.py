@@ -46,7 +46,7 @@ class File(models.Model):
     title = models.CharField(max_length=255)
     icon = ProcessedImageField(upload_to='images',
                                            processors=[ResizeToFill(300, 300)],
-                                           format='JPEG',
+                                           format='PNG',
                                            options={'quality': 80})
     type = models.CharField(max_length=255, choices=FILE_TYPE_CHOICES)
     isOpen = models.BooleanField(default=False)
