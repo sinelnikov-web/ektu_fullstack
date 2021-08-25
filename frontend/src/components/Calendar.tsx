@@ -6,7 +6,9 @@ import uuid from 'react-uuid'
 import {getDayList, getMonthOffsetList} from "../utils/calendar";
 import {useSelector} from "react-redux";
 import {activitiesSelector} from "../selectors/activities-selectors";
-import CalendarBody from "./CalendarBody";
+import loadable from '@loadable/component'
+
+const CalendarBody = loadable(() => import("./CalendarBody"))
 
 interface CalendarProps {
     hours: string

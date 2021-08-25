@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import ToolbarMainIcon from "./ToolbarMainIcon";
 import {ReactComponent as StartUpIcon} from "../assets/images/windows_startup.svg"
 import {FileType} from "./Desktop";
 import LazyImage from "./LazyImage/LazyImage";
@@ -13,6 +12,7 @@ const ToolbarWeather = loadable(() => import("./ToolbarWeather"))
 const ToolbarLanguage = loadable(() => import("./ToolbarLanguage"))
 const ToolbarSearch = loadable(() => import("./ToolbarSearch"))
 const ToolbarSocials = loadable(() => import("./ToolbarSocials"))
+const ToolbarMainIcon = loadable(() => import("./ToolbarMainIcon"))
 
 interface ToolBarProps {
     openedAppList: Array<FileType>

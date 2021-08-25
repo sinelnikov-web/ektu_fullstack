@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import {ReactComponent as ArrowUp} from "../assets/images/up_arrow.svg";
-import SocialsWidget from "./SocialsWidget";
+import loadable from '@loadable/component'
+
+const SocialsWidget = loadable(() => import("./SocialsWidget"))
 
 const ToolbarSocials = () => {
     const [showSocials, setShowSocials] = useState(false)

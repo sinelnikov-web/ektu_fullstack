@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import InstagramIcon from "../assets/images/instagram-icon.png"
-import {ElfsightWidget} from "react-elfsight-widget";
-import InstagramWidget from "./InstagramWidget";
+import InstagramIcon from "../assets/images/instagram-icon2.png"
+import loadable from '@loadable/component'
+
+const InstagramWidget = loadable(() => import("./InstagramWidget"))
 
 const ExternalWidget = () => {
     const [openWidget, setOpenWidget] = useState(false)
@@ -10,7 +11,7 @@ const ExternalWidget = () => {
         <ExternalWidgetStyled>
             <img onClick={() => setOpenWidget(prev => !prev)} className={'external-widget__icon'} src={InstagramIcon} alt=""/>
             <div className={"external-widget__body" + (openWidget ? " active" : '')}>
-                <InstagramWidget/>
+                {openWidget && <InstagramWidget/>}
             </div>
         </ExternalWidgetStyled>
     );
