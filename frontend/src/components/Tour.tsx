@@ -133,7 +133,6 @@ const Tour = () => {
     ]
 
     const userCheckTour = (state: CallBackProps) => {
-        console.log(state)
         if (state.action === 'reset' || state.action === 'skip') {
             localStorage.setItem('tourComplete', 'true')
         }

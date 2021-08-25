@@ -6,6 +6,7 @@ import uuid from 'react-uuid'
 import {getDayList, getMonthOffsetList} from "../utils/calendar";
 import {useSelector} from "react-redux";
 import {activitiesSelector} from "../selectors/activities-selectors";
+import CalendarBody from "./CalendarBody";
 
 interface CalendarProps {
     hours: string
@@ -25,6 +26,8 @@ const Calendar: React.FC<CalendarProps> = ({
                                                hours, minutes,
                                                seconds, date
                                            }) => {
+
+
 
     const activities = useSelector(activitiesSelector)
     const regions: Array<string> = []
@@ -68,7 +71,6 @@ const Calendar: React.FC<CalendarProps> = ({
     }
 
     const activeDayData = activities.filter(activity => activity.date.split('T')[0] === activeDay.toISOString().split('T')[0] && activity.region === region)
-    console.log(region)
     return (
         <CalendarStyled className={'calendar popup'} currentMonth={currentMonth}
                         monthOffset={monthOffset[currentMonth]}>
@@ -125,34 +127,7 @@ const Calendar: React.FC<CalendarProps> = ({
                             </div>
                         </div>
                         <div className="calendar__table-body">
-                            {dayList?.map((week, index) => {
-                                return (
-                                    <div key={index} className="calendar__table-row">
-                                        {week.map(day => {
-                                            if (day.dayNumber) {
-                                                const currentDate = new Date(date.getFullYear(), day.monthNumber, day.dayNumber, 12)
-                                                const isActive = currentDate.toISOString() === activeDay.toISOString()
-                                                const equalDates = activities.filter(activity => activity.date.split('T')[0] === currentDate.toISOString().split('T')[0] && activity.region === region)
-                                                const equalExist = equalDates.length !== 0
-
-                                                return (
-                                                    <div tabIndex={0} onClick={() => onDayClick(currentDate)}
-                                                         key={day.id}
-                                                         className={"calendar__table-item" + (equalExist ? ' active' : '') + (isActive ? ' selected' : '')}>
-                                                        <span>{day.dayNumber}</span>
-                                                    </div>
-                                                )
-                                            }
-                                            return (
-                                                <div key={day.id} className="calendar__table-item">
-                                                    <span></span>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                )
-
-                            })}
+                            <CalendarBody dayList={dayList} region={region} activeDay={activeDay} activities={activities} onDayClick={onDayClick}/>
                         </div>
                     </div>
                 </div>
@@ -165,9 +140,12 @@ const Calendar: React.FC<CalendarProps> = ({
                 </div>
                 <div className="calendar__activity">
                     <img src={CalendarIcon} alt="" className="calendar__activity-image"/>
-                    <p className="calendar__activity-description">
-                        {activeDayData.length !== 0 ? activeDayData[0].description : 'Мероприятий на этот день нет.'}
-                    </p>
+                    <div className="calendar__activity-info">
+                        <h3>{activeDayData.length !== 0 ? activeDayData[0].title : ''}</h3>
+                        <p className="calendar__activity-description">
+                            {activeDayData.length !== 0 ? activeDayData[0].description : 'Мероприятий на этот день нет.'}
+                        </p>
+                    </div>
                 </div>
             </div>
         </CalendarStyled>
@@ -292,11 +270,13 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
     background-color: #233339;
 
     &.active {
-      border: 1px solid red;
+      border: 1px solid black;
+      background: #33CC66;
     }
 
     &.selected {
       border: 1px solid rgba(255, 255, 255, 0.3);
+      background: #FF6600;
     }
 
     &.other-month {
@@ -320,6 +300,16 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
     .calendar__activity {
       padding: 1.5rem;
       display: flex;
+      h3 {
+        font-size: 1.5rem;
+        text-align: left;
+        border-bottom: 1px solid white;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        font-weight: 300;
+      }
     }
 
     .calendar__activity-image {

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {socialsSelector} from "../selectors/socials-selectors";
+import {baseURL} from "../api/base";
 
 interface showSocialsProps {
     showSocials: boolean
@@ -13,8 +14,8 @@ const SocialsWidget: React.FC<showSocialsProps> = ({showSocials}) => {
         <SocialsWidgetStyled className={!showSocials ? 'hidden' : ''}>
             {socials.map(social => {
                 return(
-                    <a key={social.id} href={social.link} className="social-link">
-                        <img className={'social-icon'} src={social.icon} alt=""/>
+                    <a target={'_blank'} key={social.id} href={social.link} className="social-link">
+                        <img className={'social-icon'} src={baseURL + social.icon} alt=""/>
                     </a>
                 )
             })}
