@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import File, Activity, Article
+from .models import File, Activity, Article, Social
 
 
 @register(File)
@@ -15,3 +15,7 @@ class ActivityTranslationOptions(TranslationOptions):
 @register(Article)
 class ArticleTranslationOptions(TranslationOptions):
     fields = ('title', 'text')
+
+@register(Social)
+class ArticleTranslationOptions(TranslationOptions):
+    fields = ('title',)
