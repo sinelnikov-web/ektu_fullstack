@@ -6,12 +6,20 @@ const Tour = () => {
         {
             target: '.desktop',
             content: 'Это рабочий стол. На нём располагаются папки и файлы с контентом.',
-            placement: 'top',
-            offset: -400
+            placement: 'center',
         },
         {
-            target: '.file',
+            target: '.folder',
             content: 'Это папка. Вы можете открыть её двойным нажатием.',
+            placement: 'right-start',
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
+        },
+        {
+            target: '.office',
+            content: 'Это документ office. Вы можете открыть его двойным нажатием и посмотреть содержимое.',
             placement: 'right-start',
             disableBeacon: true,
             disableOverlayClose: true,

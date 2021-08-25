@@ -47,7 +47,7 @@ const File = React.memo<FileProps>(({
                 onBlur={() => setIsFocused(false)}
                 onKeyUp={(e) => isFocused && e.code === 'Enter' ? openFileDoubleClick() : null}
                 tabIndex={1}
-                className="file"
+                className={"file" + ` ${file.type}`}
                 draggable
                 onDragStart={dragStart}
                 onDragEnd={dragEnd}

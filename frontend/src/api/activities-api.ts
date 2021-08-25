@@ -5,6 +5,7 @@ export type ActivityType = {
     title: string,
     description: string
     date: string
+    region: string
 }
 
 export const activitiesAPI = {

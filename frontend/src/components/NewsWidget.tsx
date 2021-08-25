@@ -34,7 +34,7 @@ const NewsWidgetStyled = styled.div`
   width: 600px;
   position: absolute;
   top: -1300%;
-  left: -100%;
+  left: -300%;
   background-color: #4C4C4C;
   padding: 2rem;
   overflow-y: auto;

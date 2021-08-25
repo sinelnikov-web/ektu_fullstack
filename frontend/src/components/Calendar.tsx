@@ -31,7 +31,8 @@ const Calendar: React.FC<CalendarProps> = ({
     const [currentMonth, setCurrentMonth] = useState(date.getMonth())
     const [monthOffset, setMonthOffset] = useState<Array<number>>(() => getMonthOffsetList(date))
     const [activeDay, setActiveDay] = useState(new Date(date.getFullYear(), date.getMonth(), date.getDay(), 12))
-
+    const regions: Array<string> = []
+    activities.forEach(activity => !regions.includes(activity.region) ? regions.push(activity.region) : null)
     const dayNamesMap = [
         'Воскресенье', 'Понедельник', 'Вторник',
         'Среда', 'Четверг',
@@ -75,6 +76,13 @@ const Calendar: React.FC<CalendarProps> = ({
                         <span>{dayNamesMap[date.getDay()]}, {date.getDate()} августа {date.getFullYear()} год</span>
                     </div>
                 </time>
+                <select className="calendar__region">
+                    {regions.map(region => {
+                        return(
+                            <option key={region}>{region}</option>
+                        )
+                    })}
+                </select>
             </div>
             <div className="calendar__body">
                 <div className="calendar__top">
@@ -177,7 +185,10 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
   .calendar__head {
     text-align: left;
     padding: 1.5rem 3.4rem;
-
+    .calendar__region {
+      width: 100%;
+      margin-top: 1rem;
+    }
     .calendar__time {
       font-size: 4.2rem;
       font-weight: 300;
