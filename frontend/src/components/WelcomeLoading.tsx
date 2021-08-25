@@ -36,7 +36,7 @@ const WelcomeLoadingStyled = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background: #0077d3 url(${WelcomeBackground}) no-repeat center center;
+  background: #0077d3 no-repeat center center;
   background-size: cover;
   z-index: 10000;
   transition: opacity 0.4s linear;
