@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseURL = 'http://localhost:8000'
+export const baseURL = 'https://www.ektu.space'
 
 export const apiURL = baseURL + '/api'
 export const mediaURL = baseURL + '/media/'

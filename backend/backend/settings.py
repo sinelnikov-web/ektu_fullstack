@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-c!=t&37e#potm^u8j81u%^o8iiknb0&it5#(fb9@h9mqalsq-^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['www.ektu.space', 'ektu.space']
 
 MAIN_URL = 'http://127.0.0.1:8000'
 
