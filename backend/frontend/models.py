@@ -86,7 +86,7 @@ class Activity(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField()
-    region = models.CharField(max_length=255, choices=REGION_CHOICES)
+    region = models.CharField(max_length=255, choices=REGION_CHOICES, default='Региональные')
 
     class Meta:
         verbose_name = 'Мероприятие'
