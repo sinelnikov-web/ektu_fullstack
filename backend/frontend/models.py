@@ -71,7 +71,6 @@ class File(models.Model):
 class Activity(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    date = models.DateTimeField()
 
     class Meta:
         verbose_name = 'Мероприятие'
