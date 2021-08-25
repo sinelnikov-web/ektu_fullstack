@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {ReactComponent as StartUpIcon} from "../assets/images/windows_startup.svg";
 import styled from "styled-components";
 import {ReactComponent as SearchIcon} from "../assets/images/windows_search.svg"
-import Search from "./Search";
+
 import {FileType} from "./Desktop";
+import loadable from '@loadable/component'
+
+const Search = loadable(() => import("./Search"))
 
 interface ToolbarSearchProps {
     files: Array<FileType>

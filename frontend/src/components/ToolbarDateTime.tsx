@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import Calendar from "./Calendar";
 import {currentTime} from "../utils/calendar";
+import loadable from '@loadable/component'
+
+const Calendar = loadable(() => import("./Calendar"))
 
 const ToolbarDateTime = () => {
     const [initialized, setInitialized] = useState(false)

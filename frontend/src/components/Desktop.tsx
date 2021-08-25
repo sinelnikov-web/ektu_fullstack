@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import Window from "./Window";
-import File from "./File";
+import loadable from '@loadable/component'
 import styled from "styled-components";
 import desktopBackground from "../assets/images/desktop_bg3.jpg"
 import Folder from "./Folder";
@@ -10,6 +9,9 @@ import InstagramWidget from "./InstagramWidget";
 import Browser from "./Browser";
 import ExternalWidget from "./ExternalWidget";
 import {ElfsightWidget} from "react-elfsight-widget";
+
+const Window = loadable(() => import("./Window"))
+const File = loadable(() => import("./File"))
 
 export type FileTypes = 'folder' | 'application' | 'image' | 'office' | 'widget' | 'browser'
 

@@ -2,17 +2,17 @@ import React from 'react';
 import styled from "styled-components";
 import ToolbarMainIcon from "./ToolbarMainIcon";
 import {ReactComponent as StartUpIcon} from "../assets/images/windows_startup.svg"
-import {ReactComponent as ArrowUp} from "../assets/images/up_arrow.svg"
-import {ReactComponent as VolumeIcon} from "../assets/images/volume_icon.svg"
-import ToolbarAdditionalIcon from "./ToolbarAdditionalIcon";
-import ToolbarDateTime from "./ToolbarDateTime";
 import {FileType} from "./Desktop";
 import LazyImage from "./LazyImage/LazyImage";
 import {baseURL} from "../api/base";
-import ToolbarSearch from "./ToolbarSearch";
-import ToolbarWeather from "./ToolbarWeather";
-import ToolbarLanguage from "./ToolbarLanguage";
-import ToolbarSocials from "./ToolbarSocials";
+import loadable from '@loadable/component'
+
+const ToolbarDateTime = loadable(() => import("./ToolbarDateTime"))
+const ToolbarAdditionalIcon = loadable(() => import("./ToolbarAdditionalIcon"))
+const ToolbarWeather = loadable(() => import("./ToolbarWeather"))
+const ToolbarLanguage = loadable(() => import("./ToolbarLanguage"))
+const ToolbarSearch = loadable(() => import("./ToolbarSearch"))
+const ToolbarSocials = loadable(() => import("./ToolbarSocials"))
 
 interface ToolBarProps {
     openedAppList: Array<FileType>

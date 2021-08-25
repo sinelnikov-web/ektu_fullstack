@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {weatherStateSelector} from "../selectors/weather-selectors";
-import Loader from "./Loader";
-import NewsWidget from "./NewsWidget";
+import loadable from '@loadable/component'
+
+const NewsWidget = loadable(() => import("./NewsWidget"))
+const Loader = loadable(() => import("./Loader"))
 
 const ToolbarWeather = () => {
 

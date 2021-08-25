@@ -1,14 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import ToolBar from "./components/ToolBar";
 import styled from "styled-components";
 import {GlobalStyles} from "./styles/GlobalStyles";
-import Desktop, {FileType} from "./components/Desktop";
-import EmptyFolderIcon from "./assets/images/empty_folder.png";
-import InstagramIcon from "./assets/images/instagram-icon.png";
-import ImageIcon from "./assets/images/image.jpg";
-import WordIcon from "./assets/images/word.png";
+import {FileType} from "./components/Desktop";
 import {openTree} from "./utils/openTree";
-import WindowsLoading from "./components/WindowsLoading";
 import WelcomeLoading from "./components/WelcomeLoading";
 import {useDispatch, useSelector} from "react-redux";
 import {getFilesTree} from "./redux/files-reducer";
@@ -19,9 +13,13 @@ import {languageSelector} from "./selectors/system-selectors";
 import {changeLanguage} from "./redux/actions/system-actions";
 import {LanguageType} from "./components/ToolbarLanguage";
 import {getNews} from "./redux/news-reducer";
-import Tour from "./components/Tour";
 import {useTranslation} from "react-i18next";
 import {getSocials} from "./redux/socials-reducer";
+import loadable from '@loadable/component'
+
+const Desktop = loadable(() => import("./components/Desktop"))
+const ToolBar = loadable(() => import("./components/ToolBar"))
+const Tour = loadable(() => import("./components/Tour"))
 
 function App() {
     const {t, i18n} = useTranslation()

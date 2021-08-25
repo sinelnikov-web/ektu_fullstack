@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import {LanguageMapType, LanguageType, ReverseLanguageMapType} from "./ToolbarLanguage";
 import {useDispatch} from "react-redux";
-import {getFilesTree} from "../redux/files-reducer";
 import {changeLanguage} from "../redux/actions/system-actions";
 
 interface ChangeLanguageProps {

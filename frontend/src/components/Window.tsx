@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {FileType} from "./Desktop";
 import {baseURL} from "../api/base";
 
+
 interface WindowProps {
     windowContent: ReactElement,
     onFileClose: (id: number) => void
