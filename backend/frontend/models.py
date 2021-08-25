@@ -97,6 +97,7 @@ class Activity(models.Model):
 
 
 class Social(models.Model):
+    title = models.CharField(max_length=255)
     icon = ProcessedImageField(upload_to='images',
                                            processors=[ResizeToFill(300, 300)],
                                            format='PNG',

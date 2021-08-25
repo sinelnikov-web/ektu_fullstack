@@ -21,6 +21,7 @@ import {LanguageType} from "./components/ToolbarLanguage";
 import {getNews} from "./redux/news-reducer";
 import Tour from "./components/Tour";
 import {useTranslation} from "react-i18next";
+import {getSocials} from "./redux/socials-reducer";
 
 function App() {
     const {t, i18n} = useTranslation()
@@ -37,6 +38,7 @@ function App() {
         dispatch(getFilesTree())
         dispatch(getActivities())
         dispatch(getNews())
+        dispatch(getSocials())
         languageRef.current = language
         i18n.changeLanguage(language)
     }, [language])

@@ -2,7 +2,7 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 # Register your models here.
 from django.utils.safestring import mark_safe
-from frontend.models import File, Activity, Article
+from frontend.models import File, Activity, Article, Social
 
 
 class FileInline(admin.StackedInline):
@@ -35,3 +35,7 @@ class ActivityAdmin(TranslationAdmin):
 @admin.register(Article)
 class ArticleAdmin(TranslationAdmin):
     list_display = ['title', 'id', 'text']
+
+@admin.register(Social)
+class SocialAdmin(TranslationAdmin):
+    list_display = ['title', 'link', 'id', 'icon']
