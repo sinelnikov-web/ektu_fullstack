@@ -9,8 +9,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from frontend.models import File, Activity, Article
-from frontend.serializers import FileSerializer, ActivitySerializer, ArticleSerializer
+from frontend.models import File, Activity, Article, Social
+from frontend.serializers import FileSerializer, ActivitySerializer, ArticleSerializer, SocialSerializer
 
 
 class FileView(APIView):
@@ -38,3 +38,11 @@ class ArticleView(APIView):
 
 def index(request):
     return render(request, 'build/index.html')
+
+
+class SocialView(APIView):
+
+    def get(self, request):
+        socials = Social.objects.all()
+        serializer = SocialSerializer(socials, many=True)
+        return Response(serializer.data)

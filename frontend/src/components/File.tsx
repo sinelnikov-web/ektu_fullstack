@@ -95,6 +95,8 @@ const FileStyled = styled.div`
     cursor: pointer;
     text-shadow: 0 2px 2px black;
     font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
 

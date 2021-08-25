@@ -4,18 +4,16 @@ import ChangeLanguage from "./ChangeLanguage";
 import {useSelector} from "react-redux";
 import {languageSelector} from "../selectors/system-selectors";
 
-export type LanguageType = 'ru' | 'en' | 'kk'
-export type ReverseLanguageType = 'РУС' | 'ENG' | 'КАЗ'
+export type LanguageType = 'ru' | 'kk'
+export type ReverseLanguageType = 'РУС' | 'КАЗ'
 
 export type LanguageMapType = {
     ru: ReverseLanguageType,
-    en: ReverseLanguageType,
     kk: ReverseLanguageType,
 }
 
 export type ReverseLanguageMapType = {
     'РУС': LanguageType,
-    'ENG': LanguageType,
     'КАЗ': LanguageType,
 }
 
@@ -27,12 +25,10 @@ const ToolbarLanguage = () => {
 
     const langMap: LanguageMapType = {
         ru: 'РУС',
-        en: 'ENG',
         kk: 'КАЗ',
     }
     const reverseLangMap: ReverseLanguageMapType = {
         'РУС': 'ru',
-        'ENG': 'en',
         'КАЗ': 'kk',
     }
     const [currentLanguage, setCurrentLanguage] = useState<LanguageType>('ru')

@@ -20,11 +20,12 @@ import {changeLanguage} from "./redux/actions/system-actions";
 import {LanguageType} from "./components/ToolbarLanguage";
 import {getNews} from "./redux/news-reducer";
 import Tour from "./components/Tour";
+import {useTranslation} from "react-i18next";
 
 function App() {
-
-    const languages = ['ru', 'en', 'kk']
-
+    const {t, i18n} = useTranslation()
+    const languages = ['ru', 'kk']
+    const isTourCompleted = localStorage.getItem('tourComplete')
     const [openedAppList, setOpenedAppList] = useState<FileType[]>([])
     const language = useSelector(languageSelector)
     const filesTree = useSelector(filesTreeSelector)
@@ -37,6 +38,7 @@ function App() {
         dispatch(getActivities())
         dispatch(getNews())
         languageRef.current = language
+        i18n.changeLanguage(language)
     }, [language])
     useEffect(() => {
         dispatch(getWeather())
@@ -72,7 +74,7 @@ function App() {
     return (
         <AppStyled className="App">
             <GlobalStyles/>
-            {/*<WelcomeLoading isLoading={isLoading}/>*/}
+            <WelcomeLoading isLoading={isLoading}/>
             {!isLoading && <Tour/>}
             {/*<WindowsLoading isLoading={isLoading}/>*/}
             <Desktop filesTree={filesTree} files={files} setFiles={setFiles} setOpenedAppList={setOpenedAppList}

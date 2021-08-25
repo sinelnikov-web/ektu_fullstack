@@ -4,8 +4,7 @@ import {ElfsightWidget} from "react-elfsight-widget";
 
 const InstagramWidget = () => {
     return (
-        <InstagramWidgetStyled>
-
+        <InstagramWidgetStyled className={'instagram-widget'}>
             <ElfsightWidget widgetID={'1abd6edf-21fd-4aa7-b8d4-f2ef52e89426'}/>
         </InstagramWidgetStyled>
     );

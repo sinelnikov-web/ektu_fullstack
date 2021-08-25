@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['www.ektu.space', 'ektu.space']
 
-MAIN_URL = 'http://127.0.0.1:8000'
+MAIN_URL = 'https://ektu.space'
 
 # Application definition
 

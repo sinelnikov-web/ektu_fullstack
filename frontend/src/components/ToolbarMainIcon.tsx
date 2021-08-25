@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from "styled-components";
-import {lighten} from 'polished'
 
 interface ToolbarMainIconProps {
     isActive: boolean
     onClick: (id: number) => void
     appId: number
+    cn?: string
 }
 
-const ToolbarMainIcon: React.FC<ToolbarMainIconProps> = ({children, isActive, onClick, appId}) => {
+const ToolbarMainIcon: React.FC<ToolbarMainIconProps> = ({children, isActive,
+                                                             onClick, appId, cn=''}) => {
     return (
         <ToolbarMainIconStyled
             tabIndex={0}
             onKeyUp={(e) => e.code === 'Enter' ? onClick(appId) : null}
             onClick={() => onClick(appId)}
-            className={'toolbar__icon' + (isActive ? ' active' : '')}>
+            className={'toolbar__icon' + (isActive ? ' active' : '') + ` ${cn}`}>
             {children}
         </ToolbarMainIconStyled>
     );

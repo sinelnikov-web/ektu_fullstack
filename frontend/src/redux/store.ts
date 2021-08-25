@@ -5,13 +5,15 @@ import {activityReducer} from "./activities-reducer";
 import {weatherReducer} from "./weather-reducer";
 import {systemReducer} from "./system-reducer";
 import {newsReducer} from "./news-reducer";
+import {socialsReducer} from "./socials-reducer";
 
 let rootReducer = combineReducers({
     files: filesReducer,
     activities: activityReducer,
     weather: weatherReducer,
     system: systemReducer,
-    news: newsReducer
+    news: newsReducer,
+    socials: socialsReducer
 })
 
 type RootReducerType = typeof rootReducer

@@ -20,13 +20,7 @@ const Article: React.FC<ArticleType> = ({article}) => {
                     {article.text}
                 </p>
                 <div className="news__post-footer">
-                    <div className="news__footer-left">
-                        <button className="news__post-like"><span>&#x1F44D;</span> Нравится</button>
-                        <span className="news__post-likes">{article.likes_count}&#10084;</span>
-                    </div>
-                    <div className="news__footer-right">
 
-                    </div>
                 </div>
             </div>
         </div>

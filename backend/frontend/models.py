@@ -94,3 +94,11 @@ class Activity(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Social(models.Model):
+    icon = ProcessedImageField(upload_to='images',
+                                           processors=[ResizeToFill(300, 300)],
+                                           format='PNG',
+                                           options={'quality': 80})
+    link = models.CharField(max_length=1000)

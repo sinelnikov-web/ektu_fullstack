@@ -8,6 +8,8 @@ import Image from "./Image";
 import WordFile from "./WordFile";
 import InstagramWidget from "./InstagramWidget";
 import Browser from "./Browser";
+import ExternalWidget from "./ExternalWidget";
+import {ElfsightWidget} from "react-elfsight-widget";
 
 export type FileTypes = 'folder' | 'application' | 'image' | 'office' | 'widget' | 'browser'
 
@@ -107,6 +109,7 @@ const Desktop = React.memo<DesktopProps>(({
     return (
         <DesktopStyled className={'desktop'}>
             <img className={'desktop-bg'} src={desktopBackground} alt="" onLoad={backgroundLoaded}/>
+            <ExternalWidget/>
             {
                 filesTree.map(file => {
                     return (
@@ -186,7 +189,7 @@ const DesktopStyled = styled.main`
   gap: 1rem;
   width: 100%;
   height: calc(100% - 5rem);
-  padding: 1rem;
+  padding: 1rem 8rem 1rem 1rem;
   position: relative;
   overflow: hidden;
   align-content: flex-start;

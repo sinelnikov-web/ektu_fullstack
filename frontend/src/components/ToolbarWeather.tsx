@@ -19,7 +19,7 @@ const ToolbarWeather = () => {
                     <>
                         <div className="weather__icon-wrapper">
                             <img className={'weather__icon'}
-                                 src={`http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`} alt=""/>
+                                 src={`https://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`} alt=""/>
                         </div>
                         <span
                             className={'weather__status'}>{(weather?.main?.temp - 273).toFixed()}&deg;C {weather.weather.description}</span>
@@ -80,7 +80,7 @@ const ToolbarWeatherStyled = styled.div`
       align-items: center;
       justify-content: center;
       width: auto;
-
+      padding: 0.5rem 0.8rem;
       span {
 
       }

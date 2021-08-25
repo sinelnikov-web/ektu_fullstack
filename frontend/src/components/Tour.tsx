@@ -1,16 +1,23 @@
-import Joyride from 'react-joyride';
+import Joyride, {CallBackProps} from 'react-joyride';
+import { useTranslation } from 'react-i18next';
 
 const Tour = () => {
-
+    const { t, i18n } = useTranslation();
     const steps = [
         {
+            title: `${t('Рабочий стол')}`,
             target: '.desktop',
-            content: 'Это рабочий стол. На нём располагаются папки и файлы с контентом.',
+            content: t('Это рабочий стол. На нём располагаются папки и файлы с контентом.'),
             placement: 'center',
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
         },
         {
+            title: `${t('Папка')}`,
             target: '.folder',
-            content: 'Это папка. Вы можете открыть её двойным нажатием.',
+            content: t('Это папка. Вы можете открыть её двойным нажатием.'),
             placement: 'right-start',
             disableBeacon: true,
             disableOverlayClose: true,
@@ -18,8 +25,9 @@ const Tour = () => {
             spotlightClicks: true,
         },
         {
+            title: `${t('Office документ')}`,
             target: '.office',
-            content: 'Это документ office. Вы можете открыть его двойным нажатием и посмотреть содержимое.',
+            content: t('Это документ office. Вы можете открыть его двойным нажатием и посмотреть содержимое.'),
             placement: 'right-start',
             disableBeacon: true,
             disableOverlayClose: true,
@@ -27,51 +35,109 @@ const Tour = () => {
             spotlightClicks: true,
         },
         {
+            title: `${t('Instagram.')}`,
+            target: '.external-widget__icon',
+            content: t('При нажатии на эту кнопку, откроется виджет с нашим Instagram'),
+            placement: 'right-start',
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
+        },
+        {
+            title: `${t('Панель инструментов')}`,
             target: '.toolbar',
-            content: 'Это панель иструментов. На ней располагается навигация по сайту.',
+            content: t('Это панель иструментов. На ней располагается навигация по сайту.'),
             placement: 'top',
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
         },
         {
+            title: `${t('Поиск')}`,
             target: '.toolbar-search',
-            content: 'Это поиск по сайту. При нажатии на него, откроется поиск с помощью которого Вы легко сможете найти нужный контент на сайте.',
+            content: t('Это поиск по сайту. При нажатии на него, откроется поиск с помощью которого Вы легко сможете найти нужный контент на сайте.'),
             placement: 'top',
             styles: {
                 options: {
                     zIndex: 10000,
                 },
             },
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
         },
         {
+            title: `${t('Новости')}`,
             target: '.toolbar-weather',
-            content: 'При нажатии на этот элемент Вы можете посмотреть последние новости.',
+            content: t('При нажатии на этот элемент Вы можете посмотреть последние новости.'),
             placement: 'top',
             styles: {
                 options: {
                     zIndex: 10000,
                 },
             },
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
         },
         {
+            title: `${t('Социальные сети')}`,
+            target: '.toolbar-socials',
+            content: t('При нажатии на этот элемент Вы можете увидеть ссылки на наши социальные сети.'),
+            placement: 'top',
+            styles: {
+                options: {
+                    zIndex: 10000,
+                },
+            },
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
+        },
+        {
+            title: `${t('Язык')}`,
             target: '.toolbar-language',
-            content: 'При нажатии на этот элемент Вы можете сменить язык сайта.',
+            content: t('При нажатии на этот элемент Вы можете сменить язык сайта.'),
             placement: 'top',
             styles: {
                 options: {
                     zIndex: 10000,
                 },
             },
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
         },
         {
+            title: `${t('Календарь')}`,
             target: '.toolbar-datetime',
-            content: 'При нажатии на этот элемент Вы можете посмотреть запланированные мероприятия.',
+            content: t('При нажатии на этот элемент Вы можете посмотреть запланированные мероприятия.'),
             placement: 'top',
             styles: {
                 options: {
                     zIndex: 10000,
                 },
             },
+            disableBeacon: true,
+            disableOverlayClose: true,
+            hideCloseButton: true,
+            spotlightClicks: true,
+
         },
     ]
+
+    const userCheckTour = (state: CallBackProps) => {
+        console.log(state)
+        if (state.action === 'reset' || state.action === 'skip') {
+            localStorage.setItem('tourComplete', 'true')
+        }
+    }
 
     // @ts-ignore
     return (
@@ -82,6 +148,14 @@ const Tour = () => {
                 steps={steps}
                 continuous={true}
                 run={true}
+                locale={{
+                    last: 'Закончить',
+                    next: 'Далее',
+                    back: 'Назад',
+                    skip: 'Пропустить'
+                }}
+                showSkipButton={true}
+                callback={(state) => userCheckTour(state)}
             />
         </div>
     );

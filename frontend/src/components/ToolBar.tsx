@@ -12,6 +12,7 @@ import {baseURL} from "../api/base";
 import ToolbarSearch from "./ToolbarSearch";
 import ToolbarWeather from "./ToolbarWeather";
 import ToolbarLanguage from "./ToolbarLanguage";
+import ToolbarSocials from "./ToolbarSocials";
 
 interface ToolBarProps {
     openedAppList: Array<FileType>
@@ -46,7 +47,7 @@ const ToolBar = React.memo<ToolBarProps>(({openedAppList, setFiles, files, setOp
                 </ToolbarMainIcon>
                 {openedAppList.map(app => {
                     return (
-                        <ToolbarMainIcon appId={app.id} onClick={onFileMaximize} isActive={app.isFocusedOnWindow}
+                        <ToolbarMainIcon cn={'opened-app'} appId={app.id} onClick={onFileMaximize} isActive={app.isFocusedOnWindow}
                                          key={app.id}>
                             <LazyImage src={baseURL + app.icon} alt="" cn={'toolbar-image'}/>
                         </ToolbarMainIcon>
@@ -58,9 +59,7 @@ const ToolBar = React.memo<ToolBarProps>(({openedAppList, setFiles, files, setOp
                     <ToolbarWeather/>
                 </ToolbarAdditionalIcon>
                 <ToolbarAdditionalIcon>
-                    <div className="toolbar-icon-wrapper">
-                        <ArrowUp className={'toolbar__arrow'}/>
-                    </div>
+                    <ToolbarSocials/>
                 </ToolbarAdditionalIcon>
                 <ToolbarAdditionalIcon>
                     <ToolbarLanguage/>
@@ -104,7 +103,9 @@ const ToolBarStyled = styled.div`
     height: 2rem;
   }
   @media (max-width: 767px) {
-
+    .opened-app {
+      display: none;
+    }
   }
 `
 

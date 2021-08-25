@@ -27,12 +27,17 @@ const Calendar: React.FC<CalendarProps> = ({
                                            }) => {
 
     const activities = useSelector(activitiesSelector)
+    const regions: Array<string> = []
+    activities.forEach(activity => !regions.includes(activity.region) ? regions.push(activity.region) : null)
+
     const [dayList, setDayList] = useState<Array<Array<DayType>>>(() => getDayList(date))
     const [currentMonth, setCurrentMonth] = useState(date.getMonth())
     const [monthOffset, setMonthOffset] = useState<Array<number>>(() => getMonthOffsetList(date))
     const [activeDay, setActiveDay] = useState(new Date(date.getFullYear(), date.getMonth(), date.getDay(), 12))
-    const regions: Array<string> = []
-    activities.forEach(activity => !regions.includes(activity.region) ? regions.push(activity.region) : null)
+
+    const [region, setRegion] = useState(regions[0] || '')
+
+
     const dayNamesMap = [
         'Воскресенье', 'Понедельник', 'Вторник',
         'Среда', 'Четверг',
@@ -62,8 +67,8 @@ const Calendar: React.FC<CalendarProps> = ({
         setActiveDay(selectedDayDate)
     }
 
-    const activeDayData = activities.filter(activity => activity.date.split('T')[0] === activeDay.toISOString().split('T')[0])
-
+    const activeDayData = activities.filter(activity => activity.date.split('T')[0] === activeDay.toISOString().split('T')[0] && activity.region === region)
+    console.log(region)
     return (
         <CalendarStyled className={'calendar popup'} currentMonth={currentMonth}
                         monthOffset={monthOffset[currentMonth]}>
@@ -76,10 +81,10 @@ const Calendar: React.FC<CalendarProps> = ({
                         <span>{dayNamesMap[date.getDay()]}, {date.getDate()} августа {date.getFullYear()} год</span>
                     </div>
                 </time>
-                <select className="calendar__region">
-                    {regions.map(region => {
+                <select onChange={(e) => setRegion(e.target.value)} className="calendar__region">
+                    {regions.map(curRegion => {
                         return(
-                            <option key={region}>{region}</option>
+                            <option key={curRegion} value={curRegion}>{curRegion}</option>
                         )
                     })}
                 </select>
@@ -127,7 +132,7 @@ const Calendar: React.FC<CalendarProps> = ({
                                             if (day.dayNumber) {
                                                 const currentDate = new Date(date.getFullYear(), day.monthNumber, day.dayNumber, 12)
                                                 const isActive = currentDate.toISOString() === activeDay.toISOString()
-                                                const equalDates = activities.filter(activity => activity.date.split('T')[0] === currentDate.toISOString().split('T')[0])
+                                                const equalDates = activities.filter(activity => activity.date.split('T')[0] === currentDate.toISOString().split('T')[0] && activity.region === region)
                                                 const equalExist = equalDates.length !== 0
 
                                                 return (
@@ -181,6 +186,7 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
   width: 360px;
   height: 700px;
   background-color: #233339;
+  z-index: 10000;
 
   .calendar__head {
     text-align: left;
@@ -188,6 +194,7 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
     .calendar__region {
       width: 100%;
       margin-top: 1rem;
+      padding: 0.5rem;
     }
     .calendar__time {
       font-size: 4.2rem;
