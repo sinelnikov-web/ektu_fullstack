@@ -79,7 +79,7 @@ function App() {
                 ? <MainLanguageFrame/>
                 : <>
                     <WelcomeLoading isLoading={isLoading}/>
-                    {!isLoading && isTourCompleted && <Tour/>}
+                    {!isLoading && !isTourCompleted && <Tour/>}
                     <Desktop filesTree={filesTree} files={files} setFiles={setFiles} setOpenedAppList={setOpenedAppList}
                              openedAppList={openedAppList} setLoading={setIsLoading}/>
                     <ToolBar files={files} setFiles={setFiles} openedAppList={openedAppList}
