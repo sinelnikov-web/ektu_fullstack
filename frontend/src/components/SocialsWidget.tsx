@@ -14,7 +14,7 @@ const SocialsWidget: React.FC<showSocialsProps> = ({showSocials}) => {
         <SocialsWidgetStyled className={!showSocials ? 'hidden' : ''}>
             {socials.map(social => {
                 return(
-                    <a target={'_blank'} key={social.id} href={social.link} className="social-link">
+                    <a target={'_blank'} key={social.id} href={social.link} rel="noopener noreferrer" className="social-link">
                         <img className={'social-icon'} src={baseURL + social.icon} alt=""/>
                     </a>
                 )

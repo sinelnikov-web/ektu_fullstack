@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
 import loadable from '@loadable/component'
 import styled from "styled-components";
-import desktopBackground from "../assets/images/desktop_bg3.jpg"
+import desktopBackground from "../assets/images/desktop_bg3.webp"
 import Folder from "./Folder";
 import Image from "./Image";
 import WordFile from "./WordFile";
 import InstagramWidget from "./InstagramWidget";
 import Browser from "./Browser";
 import ExternalWidget from "./ExternalWidget";
-import {ElfsightWidget} from "react-elfsight-widget";
 
 const Window = loadable(() => import("./Window"))
 const File = loadable(() => import("./File"))
