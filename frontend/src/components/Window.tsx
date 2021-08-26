@@ -269,6 +269,12 @@ const FolderStyled = styled.div<FolderStyleProps>`
     display: flex;
     align-items: center;
     padding-left: 1rem;
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
   }
 
   .top-bar__right-side {
@@ -338,6 +344,7 @@ const FolderStyled = styled.div<FolderStyleProps>`
   .content {
     width: 100%;
     height: calc(100% - 3rem);
+    overflow-y: auto;
   }
 
   @media (max-width: 823px) {

@@ -32,9 +32,6 @@ const ToolbarMainIconStyled = styled.div`
 
   &:hover {
     
-    .startup-icon {
-      fill: aqua;
-    }
   }
 
   &.toolbar__icon.active {

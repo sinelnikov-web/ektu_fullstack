@@ -84,6 +84,11 @@ const SearchStyled = styled.div`
   .search__result.hidden {
     display: none;
   }
+  .search__result {
+    .file {
+      flex-direction: row;
+    }
+  }
   .file {
     display: flex;
     align-items: center;
