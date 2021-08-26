@@ -189,13 +189,6 @@ const FolderStyled = styled.div<FolderStyleProps>`
   flex-direction: column;
   box-shadow: 0 0 4px black;
   transition: all 0.3s linear;
-
-  .folder {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-content: flex-start;
-  }
   
   .window__file-icon {
     width: 16px;

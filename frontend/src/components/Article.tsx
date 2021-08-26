@@ -10,7 +10,7 @@ interface ArticleType {
 const Article: React.FC<ArticleType> = ({article}) => {
 
     const [isTextShow, setIsTextShow] = useState(true)
-    const date = new Date(article.created).toLocaleDateString()
+    const date = new Date(article.date).toLocaleDateString()
     return (
         <div key={article.id} className={"news__post" + (isTextShow ? ' active' : '')}>
             <LazyImage src={baseURL + article.icon} alt="" cn="news__post-image"/>

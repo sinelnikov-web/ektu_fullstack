@@ -8,8 +8,8 @@ const InstagramWidget = loadable(() => import("./InstagramWidget"))
 const ExternalWidget = () => {
     const [openWidget, setOpenWidget] = useState(false)
     return (
-        <ExternalWidgetStyled>
-            <img onClick={() => setOpenWidget(prev => !prev)} className={'external-widget__icon'} src={InstagramIcon} alt=""/>
+        <ExternalWidgetStyled className={openWidget ? 'opened' : ''}>
+            <img onClick={() => setOpenWidget(prev => !prev)} className={'external-widget__icon' + (openWidget ? ' opened' : '')} src={InstagramIcon} alt=""/>
             <div className={"external-widget__body" + (openWidget ? " active" : '')}>
                 {openWidget && <InstagramWidget/>}
             </div>
@@ -23,11 +23,41 @@ const ExternalWidgetStyled = styled.div`
   position: absolute;
   top: 2rem;
   right: 2rem;
+  .opened {
+    transform: rotate(180deg);
+    opacity: 0;
+    position: relative;
+    transition: all 0.8s linear;
+  }
+  &:before {
+    content: 'X';
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    font-size: 2rem;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    line-height: 1;
+  }
+  &.opened:before {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(180deg);
+    width: auto;
+    height: auto;
+    overflow: unset;
+  }
+  
   .external-widget__icon {
     width: 100%;
     height: 100%;
     object-fit: cover;
     cursor: pointer;
+    transform: rotate(0deg);
+    transition: all 0.5s linear;
   }
   .external-widget__body {
     position: absolute;

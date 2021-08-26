@@ -33,7 +33,12 @@ const FolderStyled = styled.div`
   background: var(--white-color);
   display: flex;
   padding: 1rem;
-
+  &.folder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.3rem;
+    align-content: flex-start;
+  }
   .file:hover {
     background: rgba(0, 0, 0, 0.2) !important;
   }

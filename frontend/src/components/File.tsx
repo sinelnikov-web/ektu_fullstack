@@ -72,6 +72,10 @@ const FileStyled = styled.div`
       background: rgba(255, 255, 255, 0.2);
     }
   }
+  .file.folder {
+    display: flex;
+    flex-direction: column;
+  }
 
   .file__icon {
     cursor: pointer;

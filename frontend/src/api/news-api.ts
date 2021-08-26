@@ -8,6 +8,7 @@ export type NewsType = {
     text: string
     created: string
     likes_count: string
+    date: string
 }
 
 export const newsAPI = {
