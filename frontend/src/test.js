@@ -67,4 +67,3 @@ function openTree(tree) {
 
 let lst = openTree(files)
 
-console.log(lst)

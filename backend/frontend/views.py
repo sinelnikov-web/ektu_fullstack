@@ -16,7 +16,6 @@ from frontend.serializers import FileSerializer, ActivitySerializer, ArticleSeri
 class FileView(APIView):
 
     def get(self, request):
-        print(request.LANGUAGE_CODE)
         files = File.objects.filter(parent=None)
         serializer = FileSerializer(files, many=True)
         return Response(serializer.data)

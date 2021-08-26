@@ -31,7 +31,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['www.ektu.space', 'ektu.space']
 
-MAIN_URL = 'https://ektu.space'
+MAIN_URL = 'https://www.ektu.space'
 
 # Application definition
 
