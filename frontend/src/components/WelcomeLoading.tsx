@@ -96,6 +96,10 @@ const WelcomeLoadingStyled = styled.div`
   .user-name {
     font-weight: 300;
     font-size: 6rem;
+    margin-bottom: 1rem;
+    @media (max-width: 400px) {
+      font-size: 4.5rem;
+    }
   }
 
   .welcome-footer {

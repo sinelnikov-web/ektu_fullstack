@@ -30,7 +30,7 @@ const ToolbarWeather = () => {
             <div className="toolbar-icon-mobile toolbar-icon-wrapper" onClick={() => setIsOpen(prev => !prev)}>
                 <span>Новости</span>
             </div>
-            <NewsWidget isOpen={isOpen}/>
+            {isOpen && <NewsWidget isOpen={isOpen}/>}
         </ToolbarWeatherStyled>
     );
 };
@@ -59,7 +59,10 @@ const ToolbarWeatherStyled = styled.div`
     justify-content: center;
     align-items: center;
     gap: 1rem;
-
+    .weather__icon {
+      width: 100%;
+      height: 100%;
+    }
     &:hover {
       background-color: var(--toolbar-bg-color);
       filter: brightness(140%);

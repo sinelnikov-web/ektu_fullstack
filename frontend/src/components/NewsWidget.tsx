@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {weatherStateSelector} from "../selectors/weather-selectors";
 import {articlesSelector} from "../selectors/news-selectors";
-import {baseURL} from "../api/base";
-import LazyImage from "./LazyImage/LazyImage";
-import Article from "./Article";
+
+import loadable from "@loadable/component";
+
+const Article = loadable(() => import("./Article"))
 
 interface NewsWidgetProps {
     isOpen: boolean

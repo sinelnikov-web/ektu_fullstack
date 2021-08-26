@@ -16,6 +16,7 @@ import {getNews} from "./redux/news-reducer";
 import {useTranslation} from "react-i18next";
 import {getSocials} from "./redux/socials-reducer";
 import loadable from '@loadable/component'
+import MainLanguageFrame from "./components/MainLanguageFrame";
 
 const Desktop = loadable(() => import("./components/Desktop"))
 const ToolBar = loadable(() => import("./components/ToolBar"))
@@ -74,6 +75,7 @@ function App() {
     return (
         <AppStyled className="App">
             <GlobalStyles/>
+            {/*<MainLanguageFrame/>*/}
             <WelcomeLoading isLoading={isLoading}/>
             {!isLoading && <Tour/>}
             {/*<WindowsLoading isLoading={isLoading}/>*/}

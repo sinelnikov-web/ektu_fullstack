@@ -74,7 +74,7 @@ const ExternalWidgetStyled = styled.div`
       box-shadow: 0 0 1.5rem rgba(255, 255, 255, 0);
     }
     50% {
-      box-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 2.5rem rgba(255, 255, 255, 0.8);
     }
     100% {
       box-shadow: 0 0 1.5rem rgba(255, 255, 255, 0);

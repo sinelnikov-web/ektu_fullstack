@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {ReactElement, useEffect, useState} from 'react';
 import loadable from '@loadable/component'
 import styled from "styled-components";
 import desktopBackground from "../assets/images/desktop_bg3.webp"
@@ -107,21 +107,31 @@ const Desktop = React.memo<DesktopProps>(({
         }, 2000)
     }
 
+    const [desktopFiles, setDesktopFiles] = useState<Array<ReactElement> | null>(null)
+
+    const showDesktopFiles = () => {
+        let filesLst: Array<ReactElement> = []
+        filesTree.map(file => {
+            filesLst.push(
+                <File
+                    key={file.id}
+                    file={file}
+                    onDoubleClick={onFileDblClick}
+                    files={files}
+                />
+            )
+        })
+        setDesktopFiles(filesLst)
+    }
+    if (!desktopFiles && filesTree.length) {
+        showDesktopFiles()
+    }
     return (
         <DesktopStyled className={'desktop'}>
             <img className={'desktop-bg'} src={desktopBackground} alt="" onLoad={backgroundLoaded}/>
             <ExternalWidget/>
             {
-                filesTree.map(file => {
-                    return (
-                        <File
-                            key={file.id}
-                            file={file}
-                            onDoubleClick={onFileDblClick}
-                            files={files}
-                        />
-                    )
-                })
+                desktopFiles
             }
             {
                 files.map(file => {
