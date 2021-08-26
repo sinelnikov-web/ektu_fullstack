@@ -34,7 +34,7 @@ const NewsWidgetStyled = styled.div`
   width: 600px;
   position: absolute;
   top: -1300%;
-  left: -80%;
+  left: -170%;
   background-color: #4C4C4C;
   padding: 2rem;
   overflow-y: auto;
@@ -111,6 +111,12 @@ const NewsWidgetStyled = styled.div`
 
   }
 
+  .news__post-date {
+    color: white;
+    margin-bottom: 0.8rem;
+    opacity: 0.6;
+  }
+  
   .news__post-title {
     font-size: 1.8rem;
     font-weight: 700;

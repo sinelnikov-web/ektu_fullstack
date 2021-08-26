@@ -3,12 +3,15 @@ import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {weatherStateSelector} from "../selectors/weather-selectors";
 import loadable from '@loadable/component'
+import {useTranslation} from "react-i18next";
+import {ReactComponent as CloudsIcon} from "../assets/images/clouds.svg"
 
 const NewsWidget = loadable(() => import("./NewsWidget"))
 const Loader = loadable(() => import("./Loader"))
 
 const ToolbarWeather = () => {
 
+    const {t, i18n} = useTranslation()
     const weather = useSelector(weatherStateSelector)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -20,15 +23,15 @@ const ToolbarWeather = () => {
                     :
                     <>
                         <div className="weather__icon-wrapper">
-                            <img className={'weather__icon'}
-                                 src={`https://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`} alt=""/>
+
+                            <CloudsIcon className={'weather__icon'}/>
                         </div>
                         <span
-                            className={'weather__status'}>{(weather?.main?.temp - 273).toFixed()}&deg;C {weather.weather.description}</span>
+                            className={'weather__status'}>{(weather?.main?.temp - 273).toFixed()}&deg;C {t('облачно')}</span>
                     </>}
             </div>
             <div className="toolbar-icon-mobile toolbar-icon-wrapper" onClick={() => setIsOpen(prev => !prev)}>
-                <span>Новости</span>
+                <span>{t('Новости')}</span>
             </div>
             {isOpen && <NewsWidget isOpen={isOpen}/>}
         </ToolbarWeatherStyled>

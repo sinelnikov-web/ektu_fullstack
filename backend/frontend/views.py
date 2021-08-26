@@ -20,6 +20,7 @@ class FileView(APIView):
         serializer = FileSerializer(files, many=True)
         return Response(serializer.data)
 
+
 class ActivityView(APIView):
 
     def get(self, request):
@@ -31,9 +32,10 @@ class ActivityView(APIView):
 class ArticleView(APIView):
 
     def get(self, request):
-        articles = Article.objects.all()
+        articles = Article.objects.order_by('-created')
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
+
 
 def index(request):
     return render(request, 'build/index.html')
