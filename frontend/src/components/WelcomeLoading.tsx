@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import WelcomeBackground from "../assets/images/welcome_bg.jpg"
 import Loader from "./Loader";
+import {useTranslation} from "react-i18next";
 
 interface WelcomeLoadingProps {
     isLoading: boolean
@@ -9,7 +10,7 @@ interface WelcomeLoadingProps {
 
 const WelcomeLoading: React.FC<WelcomeLoadingProps> = ({isLoading}) => {
     const [isHide, setIsHide] = useState(false)
-
+    const {t, i18n} = useTranslation()
     return (
         <WelcomeLoadingStyled
             className={(!isLoading ? "loaded" : '') + (isHide ? " hidden" : '')}
@@ -23,7 +24,7 @@ const WelcomeLoading: React.FC<WelcomeLoadingProps> = ({isLoading}) => {
                 <h1 className="user-name">Jambyl Oblysy</h1>
                 <div className="welcome-footer">
                     <Loader/>
-                    <h2>Добро пожаловать</h2>
+                    <h2>{t('Добро пожаловать')}</h2>
                 </div>
             </div>
         </WelcomeLoadingStyled>

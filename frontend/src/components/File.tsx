@@ -1,6 +1,5 @@
-import React, {Component, DragEventHandler, ReactElement, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
-import EmptyFolderIcon from "../assets/images/empty_folder.png";
 import FileIcon from "./FileIcon";
 import {FileType, FileTypes} from "./Desktop";
 

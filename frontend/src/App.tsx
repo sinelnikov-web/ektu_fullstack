@@ -39,7 +39,7 @@ function App() {
         dispatch(getNews())
         dispatch(getSocials())
         languageRef.current = language
-        i18n.changeLanguage(language)
+        i18n.changeLanguage(language as LanguageType)
     }, [language])
     useEffect(() => {
         dispatch(getWeather())
@@ -56,7 +56,7 @@ function App() {
         }))
     }, [filesTree])
     const nextLang = (e: KeyboardEvent) => {
-        const currentLanguageIndex = languages.indexOf(languageRef.current)
+        const currentLanguageIndex = languages.indexOf(languageRef.current as string)
         if (e.altKey && e.shiftKey) {
             if (currentLanguageIndex + 1 === languages.length) {
                 localStorage.setItem('currentLanguage', languages[0])
@@ -75,14 +75,18 @@ function App() {
     return (
         <AppStyled className="App">
             <GlobalStyles/>
-            {/*<MainLanguageFrame/>*/}
-            <WelcomeLoading isLoading={isLoading}/>
-            {!isLoading && <Tour/>}
-            {/*<WindowsLoading isLoading={isLoading}/>*/}
-            <Desktop filesTree={filesTree} files={files} setFiles={setFiles} setOpenedAppList={setOpenedAppList}
-                     openedAppList={openedAppList} setLoading={setIsLoading}/>
-            <ToolBar files={files} setFiles={setFiles} openedAppList={openedAppList}
-                     setOpenedAppList={setOpenedAppList}/>
+            {!language
+                ? <MainLanguageFrame/>
+                : <>
+                    <WelcomeLoading isLoading={isLoading}/>
+                    {!isLoading && isTourCompleted && <Tour/>}
+                    <Desktop filesTree={filesTree} files={files} setFiles={setFiles} setOpenedAppList={setOpenedAppList}
+                             openedAppList={openedAppList} setLoading={setIsLoading}/>
+                    <ToolBar files={files} setFiles={setFiles} openedAppList={openedAppList}
+                             setOpenedAppList={setOpenedAppList}/>
+                </>
+            }
+
         </AppStyled>
     );
 }

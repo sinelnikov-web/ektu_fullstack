@@ -109,29 +109,21 @@ const Desktop = React.memo<DesktopProps>(({
 
     const [desktopFiles, setDesktopFiles] = useState<Array<ReactElement> | null>(null)
 
-    const showDesktopFiles = () => {
-        let filesLst: Array<ReactElement> = []
-        filesTree.map(file => {
-            filesLst.push(
-                <File
-                    key={file.id}
-                    file={file}
-                    onDoubleClick={onFileDblClick}
-                    files={files}
-                />
-            )
-        })
-        setDesktopFiles(filesLst)
-    }
-    if (!desktopFiles && filesTree.length) {
-        showDesktopFiles()
-    }
     return (
         <DesktopStyled className={'desktop'}>
             <img className={'desktop-bg'} src={desktopBackground} alt="" onLoad={backgroundLoaded}/>
             <ExternalWidget/>
             {
-                desktopFiles
+                filesTree.map(file => {
+                    return(
+                        <File
+                            key={file.id}
+                            file={file}
+                            onDoubleClick={onFileDblClick}
+                            files={files}
+                        />
+                    )
+                })
             }
             {
                 files.map(file => {

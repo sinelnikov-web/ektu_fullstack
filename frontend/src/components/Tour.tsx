@@ -47,7 +47,7 @@ const Tour = () => {
         {
             title: `${t('Панель инструментов')}`,
             target: '.toolbar',
-            content: t('Это панель иструментов. На ней располагается навигация по сайту.'),
+            content: t('Это панель инструментов. На ней располагается навигация по сайту.'),
             placement: 'top',
             disableBeacon: true,
             disableOverlayClose: true,
@@ -117,7 +117,7 @@ const Tour = () => {
         {
             title: `${t('Календарь')}`,
             target: '.toolbar-datetime',
-            content: t('При нажатии на этот элемент Вы можете посмотреть запланированные мероприятия.'),
+            content: t('При нажатии на этот элемент Вы можете посмотреть запланированные мероприятия по регионам.'),
             placement: 'top',
             styles: {
                 options: {
@@ -148,10 +148,10 @@ const Tour = () => {
                 continuous={true}
                 run={true}
                 locale={{
-                    last: 'Закончить',
-                    next: 'Далее',
-                    back: 'Назад',
-                    skip: 'Пропустить'
+                    last: t('Закончить'),
+                    next: t('Далее'),
+                    back: t('Назад'),
+                    skip: t('Пропустить')
                 }}
                 showSkipButton={true}
                 callback={(state) => userCheckTour(state)}

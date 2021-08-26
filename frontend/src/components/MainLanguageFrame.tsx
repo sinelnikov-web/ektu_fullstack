@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {changeLanguage} from "../redux/actions/system-actions";
+import {LanguageType} from "./ToolbarLanguage";
 
 const MainLanguageFrame = () => {
+
+    const dispatch = useDispatch()
+    const setAppLang = (e: MouseEvent<HTMLLIElement>) => {
+        localStorage.setItem('currentLanguage', e.currentTarget.id)
+        dispatch(changeLanguage(e.currentTarget.id as LanguageType))
+    }
+
     return (
         <MainLanguageFrameStyled>
             <div className="choose-language">
                 <h1 className={"choose-language__title"}>Выберите язык</h1>
                 <ul className="choose-language__list">
-                    <li className="choose-language__item"><span>Русский</span></li>
-                    <li className="choose-language__item"><span>Қазақ</span></li>
+                    <li onClick={setAppLang} id={'ru'} className="choose-language__item"><span>Русский</span></li>
+                    <li onClick={setAppLang} id={'kk'} className="choose-language__item"><span>Қазақ</span></li>
                 </ul>
             </div>
         </MainLanguageFrameStyled>

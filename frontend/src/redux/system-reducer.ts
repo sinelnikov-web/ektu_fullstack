@@ -4,7 +4,7 @@ import {LanguageType} from "../components/ToolbarLanguage";
 
 
 const initialState = {
-    language: localStorage.getItem('currentLanguage') || 'ru',
+    language: localStorage.getItem('currentLanguage'),
 
 }
 

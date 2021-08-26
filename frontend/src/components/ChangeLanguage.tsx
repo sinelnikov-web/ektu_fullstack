@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {LanguageMapType, LanguageType, ReverseLanguageMapType} from "./ToolbarLanguage";
 import {useDispatch} from "react-redux";
 import {changeLanguage} from "../redux/actions/system-actions";
+import {useTranslation} from "react-i18next";
 
 interface ChangeLanguageProps {
     langMap: LanguageMapType
@@ -20,11 +21,10 @@ const ChangeLanguage: React.FC<ChangeLanguageProps> = ({
                                                            setCurrentLanguage
                                                        }) => {
 
-
+    const {t, i18n} = useTranslation()
     const fullLangNames = {
-        ru: 'Русский',
-        en: 'Английский',
-        kk: 'Казахский',
+        ru: t('Русский'),
+        kk: t('Казахский'),
     }
 
     const dispatch = useDispatch()

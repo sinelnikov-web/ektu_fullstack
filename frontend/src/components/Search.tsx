@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {ReactComponent as SearchIcon} from "../assets/images/windows_search.svg";
 import {FileType} from "./Desktop";
 import File from "./File";
+import {useTranslation} from "react-i18next";
 
 interface SearchProps {
     files: Array<FileType>
@@ -12,7 +13,7 @@ interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = ({files, setFiles, className, setOpenSearch}) => {
-
+    const {t, i18n} = useTranslation()
     const [query, setQuery] = useState('')
 
     const onChange = (e:ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +46,7 @@ const Search: React.FC<SearchProps> = ({files, setFiles, className, setOpenSearc
             <div className="search__footer">
                 <div className="search__field">
                     <label>
-                        <input onChange={onChange} value={query} type="text" className="search__input" placeholder={'Введите текст для поиска'}/>
+                        <input onChange={onChange} value={query} type="text" className="search__input" placeholder={t('Введите текст для поиска')}/>
                         <SearchIcon className={'input__search-icon'}/>
                     </label>
                 </div>

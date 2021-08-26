@@ -103,3 +103,5 @@ class Social(models.Model):
                                            format='PNG',
                                            options={'quality': 80})
     link = models.CharField(max_length=1000)
+    def __str__(self):
+        return self.title

@@ -7,6 +7,7 @@ import {getDayList, getMonthOffsetList} from "../utils/calendar";
 import {useSelector} from "react-redux";
 import {activitiesSelector} from "../selectors/activities-selectors";
 import loadable from '@loadable/component'
+import {useTranslation} from "react-i18next";
 
 const CalendarBody = loadable(() => import("./CalendarBody"))
 
@@ -30,7 +31,7 @@ const Calendar: React.FC<CalendarProps> = ({
                                            }) => {
 
 
-
+    const {t, i18n} = useTranslation()
     const activities = useSelector(activitiesSelector)
     const regions: Array<string> = []
     activities.forEach(activity => !regions.includes(activity.region) ? regions.push(activity.region) : null)
@@ -44,17 +45,17 @@ const Calendar: React.FC<CalendarProps> = ({
 
 
     const dayNamesMap = [
-        'Воскресенье', 'Понедельник', 'Вторник',
-        'Среда', 'Четверг',
-        'Пятница', 'Суббота',
+        t('Воскресенье'), t('Понедельник'), t('Вторник'),
+        t('Среда'), t('Четверг'),
+        t('Пятница'), t('Суббота'),
     ]
     const monthNamesMap = [
-        'Январь', 'Февраль',
-        'Март', 'Апрель',
-        'Май', 'Июнь',
-        'Июль', 'Август',
-        'Сентябрь', 'Октябрь',
-        'Ноябрь', 'Декабрь',
+        t('Январь'), t('Февраль'),
+        t('Март'), t('Апрель'),
+        t('Май'), t('Июнь'),
+        t('Июль'), t('Август'),
+        t('Сентябрь'), t('Октябрь'),
+        t('Ноябрь'), t('Декабрь'),
     ]
 
     const nextMonth = () => {
@@ -82,7 +83,7 @@ const Calendar: React.FC<CalendarProps> = ({
                         <span>{hours}:{minutes}:{seconds}</span>
                     </div>
                     <div className="calendar__date">
-                        <span>{dayNamesMap[date.getDay()]}, {date.getDate()} августа {date.getFullYear()} год</span>
+                        <span>{dayNamesMap[date.getDay()]}, {date.getDate()} {monthNamesMap[date.getMonth()]} {date.getFullYear()} {t('год')}</span>
                     </div>
                 </time>
                 <select onChange={(e) => setRegion(e.target.value)} className="calendar__region">
@@ -95,7 +96,7 @@ const Calendar: React.FC<CalendarProps> = ({
             </div>
             <div className="calendar__body">
                 <div className="calendar__top">
-                    <h2 className="calendar__title">{monthNamesMap[currentMonth]} {date.getFullYear()} г.</h2>
+                    <h2 className="calendar__title">{monthNamesMap[currentMonth]} {date.getFullYear()} {t('г.')}</h2>
                     <div className="calendar__controls">
                         <button className="calendar-up" onClick={prevMonth}></button>
                         <button className="calendar-down" onClick={nextMonth}></button>
@@ -145,7 +146,7 @@ const Calendar: React.FC<CalendarProps> = ({
                     <div className="calendar__activity-info">
                         <h3>{activeDayData.length !== 0 ? activeDayData[0].title : ''}</h3>
                         <p className="calendar__activity-description">
-                            {activeDayData.length !== 0 ? activeDayData[0].description : 'Мероприятий на этот день нет.'}
+                            {activeDayData.length !== 0 ? activeDayData[0].description : t('Мероприятий на этот день нет.')}
                         </p>
                     </div>
                 </div>
