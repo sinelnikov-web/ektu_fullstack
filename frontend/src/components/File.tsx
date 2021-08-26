@@ -40,7 +40,7 @@ const File = React.memo<FileProps>(({
         e.currentTarget.classList.remove('hold')
     }
     return (
-        <FileStyled ref={fileRef} className={'file-wrapper'}>
+        <FileStyled title={file.title} ref={fileRef} className={'file-wrapper'}>
             <div
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
@@ -95,7 +95,7 @@ const FileStyled = styled.div`
     text-shadow: 0 2px 2px black;
     font-weight: 300;
     overflow: hidden;
-    text-overflow: ellipsis;
+    max-height: 50px;
   }
 `
 

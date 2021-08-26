@@ -5,6 +5,7 @@ export type SocialType = {
     id: number
     icon: string
     link: string
+    title: string
 }
 
 export const socialAPI = {

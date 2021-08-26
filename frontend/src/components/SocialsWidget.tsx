@@ -14,7 +14,7 @@ const SocialsWidget: React.FC<showSocialsProps> = ({showSocials}) => {
         <SocialsWidgetStyled className={!showSocials ? 'hidden' : ''}>
             {socials.map(social => {
                 return(
-                    <a target={'_blank'} key={social.id} href={social.link} rel="noopener noreferrer" className="social-link">
+                    <a title={social.title} target={'_blank'} key={social.id} href={social.link} rel="noopener noreferrer" className="social-link">
                         <img className={'social-icon'} src={baseURL + social.icon} alt=""/>
                     </a>
                 )
@@ -33,7 +33,7 @@ const SocialsWidgetStyled = styled.div`
   gap: 1rem;
   flex-wrap: wrap;
   background: transparent;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-content: flex-start;
   backdrop-filter: blur(3px);
   display: flex;
@@ -60,7 +60,6 @@ const SocialsWidgetStyled = styled.div`
     display: block;
     width: 25%;
     height: 25%;
-    border-radius: 50%;
     overflow: hidden;
     img {
       width: 100%;
