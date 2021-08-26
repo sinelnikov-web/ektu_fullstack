@@ -27,7 +27,7 @@ const Tour = () => {
         {
             title: `${t('Office документ')}`,
             target: '.office',
-            content: t('Это документ office. Вы можете открыть его двойным нажатием и посмотреть содержимое.'),
+            content: t('Это документ office. Вы можете открыть его двойным нажатием и посмотреть содержимое, скачать, распечатать.'),
             placement: 'right-start',
             disableBeacon: true,
             disableOverlayClose: true,
