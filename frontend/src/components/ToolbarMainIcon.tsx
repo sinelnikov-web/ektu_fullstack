@@ -52,7 +52,7 @@ const ToolbarMainIconStyled = styled.div`
   }
   
   @media (max-width: 340px) {
-    width: 3.5rem;
+    width: 2.5rem;
   }
 `
 
