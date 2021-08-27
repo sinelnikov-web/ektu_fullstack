@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import WelcomeBackground from "../assets/images/welcome_bg.jpg"
+import JambylLogo from "../assets/images/jambyl_logo.png"
 import Loader from "./Loader";
 import {useTranslation} from "react-i18next";
 
@@ -18,8 +18,9 @@ const WelcomeLoading: React.FC<WelcomeLoadingProps> = ({isLoading}) => {
         >
             <div className="loading-plane">
                 <div className="user-image">
-                    <div className="user-head"></div>
-                    <div className="user-body"></div>
+                    {/*<div className="user-head"></div>*/}
+                    {/*<div className="user-body"></div>*/}
+                    <img src={JambylLogo} alt=""/>
                 </div>
                 <h1 className="user-name">Jambyl Oblysy</h1>
                 <div className="welcome-footer">
@@ -68,6 +69,11 @@ const WelcomeLoadingStyled = styled.div`
     position: relative;
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .user-head {
