@@ -192,7 +192,7 @@ const DesktopStyled = styled.main`
   gap: 1rem;
   width: 100%;
   height: calc(100% - 5rem);
-  padding: 1rem 8rem 1rem 1rem;
+  padding: 1rem 6rem 1rem 1rem;
   position: relative;
   overflow: hidden;
   align-content: flex-start;
