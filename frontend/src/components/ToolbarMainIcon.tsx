@@ -29,7 +29,9 @@ const ToolbarMainIconStyled = styled.div`
   justify-content: center;
   align-items: center;
   cursor: default;
-
+  @media (max-width: 400px) {
+    width: 4rem;
+  }
   &:hover {
     
   }

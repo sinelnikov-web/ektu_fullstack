@@ -65,7 +65,7 @@ const File = React.memo<FileProps>(({
 const FileStyled = styled.div`
   display: block;
   text-align: center;
-  max-width: 7.1rem;
+  max-width: 8rem;
 
   .file:hover {
     &:hover {
@@ -101,7 +101,7 @@ const FileStyled = styled.div`
     text-shadow: 0 2px 2px black;
     font-weight: 300;
     overflow: hidden;
-    max-height: 50px;
+    max-height: 80px;
   }
 `
 

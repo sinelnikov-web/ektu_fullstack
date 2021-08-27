@@ -101,6 +101,10 @@ const ToolBarStyled = styled.div`
   .startup-icon {
     width: 2rem;
     height: 2rem;
+    @media (max-width: 400px) {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
   @media (max-width: 767px) {
     .opened-app {
