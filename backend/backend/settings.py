@@ -31,8 +31,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['www.ektu.space', 'ektu.space', 'web']
 
-# MAIN_URL = 'https://www.ektu.space'
-MAIN_URL = 'http://localhost'
+MAIN_URL = 'https://www.ektu.space'
+# MAIN_URL = 'http://localhost'
 
 # Application definition
 
