@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {MouseEvent, useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import {GlobalStyles} from "./styles/GlobalStyles";
 import {FileType} from "./components/Desktop";
@@ -9,8 +9,8 @@ import {getFilesTree} from "./redux/files-reducer";
 import {filesTreeSelector} from "./selectors/files-selectors";
 import {getActivities} from "./redux/activities-reducer";
 import {getWeather} from "./redux/weather-reducer";
-import {languageSelector} from "./selectors/system-selectors";
-import {changeLanguage} from "./redux/actions/system-actions";
+import {languageSelector, targetSelector} from "./selectors/system-selectors";
+import {changeLanguage, setTarget} from "./redux/actions/system-actions";
 import {LanguageType} from "./components/ToolbarLanguage";
 import {getNews} from "./redux/news-reducer";
 import {useTranslation} from "react-i18next";
@@ -71,9 +71,14 @@ function App() {
     useEffect(() => {
         window.addEventListener('keydown', nextLang)
     }, [])
-
+    const mainRef = useRef<HTMLDivElement>(null)
+    const globalTarget = useSelector(targetSelector)
+    const setGlobalTarget = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
+        dispatch(setTarget(e.currentTarget))
+    }
     return (
-        <AppStyled className="App">
+        <AppStyled ref={mainRef} onClick={setGlobalTarget} className="App">
             <GlobalStyles/>
             {!language
                 ? <MainLanguageFrame/>

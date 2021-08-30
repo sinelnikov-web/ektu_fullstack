@@ -78,7 +78,6 @@ const FileStyled = styled.div`
   }
 
   .file__icon {
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,7 +96,6 @@ const FileStyled = styled.div`
   .file__title {
     color: var(--white-color);
     font-size: 1.2rem;
-    cursor: pointer;
     text-shadow: 0 2px 2px black;
     font-weight: 300;
     overflow: hidden;

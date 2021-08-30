@@ -27,11 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c!=t&37e#potm^u8j81u%^o8iiknb0&it5#(fb9@h9mqalsq-^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['www.ektu.space', 'ektu.space']
+ALLOWED_HOSTS = ['www.ektu.space', 'ektu.space', 'web']
 
-MAIN_URL = 'https://www.ektu.space'
+# MAIN_URL = 'https://www.ektu.space'
+MAIN_URL = 'http://localhost'
 
 # Application definition
 

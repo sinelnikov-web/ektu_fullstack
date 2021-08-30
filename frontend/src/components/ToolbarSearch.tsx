@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {MouseEvent, useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import {ReactComponent as SearchIcon} from "../assets/images/windows_search.svg"
 
 import {FileType} from "./Desktop";
 import loadable from '@loadable/component'
+import {useDispatch, useSelector} from "react-redux";
+import {targetSelector} from "../selectors/system-selectors";
+import {setTarget} from "../redux/actions/system-actions";
 
 const Search = loadable(() => import("./Search"))
 
@@ -13,15 +16,29 @@ interface ToolbarSearchProps {
 }
 
 const ToolbarSearch: React.FC<ToolbarSearchProps> = ({files, setFiles}) => {
-
-    const [openSearch, setOpenSearch] = useState<boolean>(false)
+    const [openSearch, setOpenSearch] = useState(false)
+    const mainRef = useRef<HTMLDivElement>(null)
+    const globalTarget = useSelector(targetSelector)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (globalTarget !== mainRef.current && openSearch) {
+            setOpenSearch(false)
+        }
+    }, [globalTarget])
+    const setGlobalTarget = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
+        dispatch(setTarget(e.currentTarget))
+    }
+    const check = (globalTarget === mainRef.current) && mainRef.current
 
     return (
-        <ToolbarSearchStyled className={'toolbar-search'} onClick={() => setOpenSearch(prev => !prev)}>
-            <div className="toolbar-icon-wrapper">
+        <ToolbarSearchStyled ref={mainRef} className={'toolbar-search'} onClick={(e) => {
+            setGlobalTarget(e)
+        }}>
+            <div className="toolbar-icon-wrapper" onClick={() => setOpenSearch(prev => !prev)}>
                 <SearchIcon className={'search-icon'}/>
             </div>
-            <Search setOpenSearch={setOpenSearch} className={!openSearch ? 'hidden' : ''} setFiles={setFiles}
+            <Search className={!check || !openSearch ? 'hidden' : ''} setFiles={setFiles}
                     files={files}/>
         </ToolbarSearchStyled>
     );

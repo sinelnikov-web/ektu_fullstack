@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, MouseEvent, useRef} from 'react';
 import styled from "styled-components";
 import {currentTime} from "../utils/calendar";
 import loadable from '@loadable/component'
+import {useDispatch, useSelector} from "react-redux";
+import {setTarget} from "../redux/actions/system-actions";
+import {targetSelector} from "../selectors/system-selectors";
 
 const Calendar = loadable(() => import("./Calendar"))
 
@@ -15,6 +18,8 @@ const ToolbarDateTime = () => {
     const [month, setMonth] = useState<string>('0')
     const [date, setDate] = useState<Date>(new Date(Date.now()))
     const [showCalendar, setShowCalendar] = useState(false)
+
+
 
     const setCurrentDate = () => {
 
@@ -43,9 +48,21 @@ const ToolbarDateTime = () => {
             }, 1000)
         }
     }, [seconds])
+    const mainRef = useRef<HTMLDivElement>(null)
+    const globalTarget = useSelector(targetSelector)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (globalTarget !== mainRef.current && showCalendar) {
+            setShowCalendar(false)
+        }
+    }, [globalTarget])
+    const setGlobalTarget = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
+        dispatch(setTarget(e.currentTarget))
+    }
 
     return (
-        <ToolbarDateTimeStyled className={'toolbar-datetime'}>
+        <ToolbarDateTimeStyled ref={mainRef} onClick={setGlobalTarget} className={'toolbar-datetime'}>
             <div className="toolbar-icon-wrapper">
                 <time tabIndex={0} onKeyUp={(e) => e.code === 'Enter' ? setShowCalendar(!showCalendar) : null}
                       className={'toolbar-icon'} dateTime={'20'} onClick={() => setShowCalendar(prev => !prev)}>
@@ -57,7 +74,7 @@ const ToolbarDateTime = () => {
                     </div>
                 </time>
             </div>
-            {showCalendar && <Calendar date={date} hours={hours} minutes={minutes} seconds={seconds}/>}
+            {globalTarget === mainRef.current && showCalendar && <Calendar date={date} hours={hours} minutes={minutes} seconds={seconds}/>}
         </ToolbarDateTimeStyled>
     );
 };

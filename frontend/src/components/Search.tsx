@@ -9,10 +9,9 @@ interface SearchProps {
     files: Array<FileType>
     setFiles: (cllbck: (files: Array<FileType>) => Array<FileType>) => void
     className: string
-    setOpenSearch: (cllback: (isSearchOpen: boolean) => boolean) => void
 }
 
-const Search: React.FC<SearchProps> = ({files, setFiles, className, setOpenSearch}) => {
+const Search: React.FC<SearchProps> = ({files, setFiles, className}) => {
     const {t, i18n} = useTranslation()
     const [query, setQuery] = useState('')
 
@@ -31,12 +30,11 @@ const Search: React.FC<SearchProps> = ({files, setFiles, className, setOpenSearc
                 }
             })
         })
-        setOpenSearch((prev) => false)
     }
 
 
     return (
-        <SearchStyled className={className + ' toolbar-search-popup'} onClick={() => setOpenSearch(prev => !prev)}>
+        <SearchStyled className={className + ' toolbar-search-popup'}>
             <div className="search__body">
                 {files.map(file => file.title.toLowerCase().includes(query.toLowerCase())
                     ?

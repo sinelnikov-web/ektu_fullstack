@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {MouseEvent, useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import ChangeLanguage from "./ChangeLanguage";
-import {useSelector} from "react-redux";
-import {languageSelector} from "../selectors/system-selectors";
+import {useDispatch, useSelector} from "react-redux";
+import {languageSelector, targetSelector} from "../selectors/system-selectors";
+import {setTarget} from "../redux/actions/system-actions";
 
 export type LanguageType = 'ru' | 'kk'
 export type ReverseLanguageType = 'РУС' | 'КАЗ'
@@ -41,13 +42,25 @@ const ToolbarLanguage = () => {
     useEffect(() => {
         setCurrentLanguage(language as LanguageType)
     }, [language])
-
+    const mainRef = useRef<HTMLDivElement>(null)
+    const globalTarget = useSelector(targetSelector)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (globalTarget !== mainRef.current && showLanguages) {
+            setShowLanguages(false)
+        }
+    }, [globalTarget])
+    const setGlobalTarget = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
+        dispatch(setTarget(e.currentTarget))
+    }
+    const check = (globalTarget === mainRef.current) && mainRef.current
     return (
-        <ToolbarLanguageStyled className={'toolbar-language'}>
+        <ToolbarLanguageStyled ref={mainRef} onClick={setGlobalTarget} className={'toolbar-language'}>
             <div className="toolbar-icon-wrapper" onClick={() => setShowLanguages(prev => !prev)}>
                 <span className={'language__code'}>{langMap[currentLanguage]}</span>
             </div>
-            <ChangeLanguage showLanguages={showLanguages} setCurrentLanguage={setCurrentLanguage}
+            <ChangeLanguage showLanguages={showLanguages && !!check} setCurrentLanguage={setCurrentLanguage}
                             currentLanguage={currentLanguage} langMap={langMap} reverseLangMap={reverseLangMap}/>
         </ToolbarLanguageStyled>
     );

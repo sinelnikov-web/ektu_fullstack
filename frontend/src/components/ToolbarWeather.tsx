@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {MouseEvent, useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {weatherStateSelector} from "../selectors/weather-selectors";
 import loadable from '@loadable/component'
 import {useTranslation} from "react-i18next";
 import {ReactComponent as CloudsIcon} from "../assets/images/clouds.svg"
+import {targetSelector} from "../selectors/system-selectors";
+import {setTarget} from "../redux/actions/system-actions";
 
 const NewsWidget = loadable(() => import("./NewsWidget"))
 const Loader = loadable(() => import("./Loader"))
@@ -14,9 +16,21 @@ const ToolbarWeather = () => {
     const {t, i18n} = useTranslation()
     const weather = useSelector(weatherStateSelector)
     const [isOpen, setIsOpen] = useState(false)
-
+    const mainRef = useRef<HTMLDivElement>(null)
+    const globalTarget = useSelector(targetSelector)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (globalTarget !== mainRef.current && isOpen) {
+            setIsOpen(false)
+        }
+    }, [globalTarget])
+    const setGlobalTarget = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
+        dispatch(setTarget(e.currentTarget))
+    }
+    const check = (globalTarget === mainRef.current) && mainRef.current
     return (
-        <ToolbarWeatherStyled className={'toolbar-weather'}>
+        <ToolbarWeatherStyled ref={mainRef} onClick={setGlobalTarget} className={'toolbar-weather'}>
             <div className="toolbar-icon-wrapper" onClick={() => setIsOpen(prev => !prev)}>
                 {weather.isFetching ?
                     <Loader/>
@@ -33,7 +47,7 @@ const ToolbarWeather = () => {
             <div className="toolbar-icon-mobile toolbar-icon-wrapper" onClick={() => setIsOpen(prev => !prev)}>
                 <span>{t('Новости')}</span>
             </div>
-            {isOpen && <NewsWidget isOpen={isOpen}/>}
+            {isOpen && check && <NewsWidget isOpen={isOpen}/>}
         </ToolbarWeatherStyled>
     );
 };

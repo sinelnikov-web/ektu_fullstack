@@ -1,0 +1,2 @@
+(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[14],{114:function(n,t,e){"use strict";e.r(t);var r,o=e(8),i=(e(0),e(9)),c=e(1),a=i.b.div(r||(r=Object(o.a)(["\n  height: 100%;\n  background-color: var(--toolbar-bg-color);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 1.5rem;\n  cursor: default;\n\n  svg {\n    width: 55%;\n    height: 100%;\n  }\n"])));t.default=function(n){var t=n.children;return Object(c.jsx)(a,{className:"toolbar__additional-icon",children:t})}}}]);
+//# sourceMappingURL=14.81ada623.chunk.js.map
