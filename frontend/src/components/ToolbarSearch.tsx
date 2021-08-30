@@ -38,7 +38,7 @@ const ToolbarSearch: React.FC<ToolbarSearchProps> = ({files, setFiles}) => {
             <div className="toolbar-icon-wrapper" onClick={() => setOpenSearch(prev => !prev)}>
                 <SearchIcon className={'search-icon'}/>
             </div>
-            <Search className={!check || !openSearch ? 'hidden' : ''} setFiles={setFiles}
+            <Search setOpenSearch={setOpenSearch} className={!check || !openSearch ? 'hidden' : ''} setFiles={setFiles}
                     files={files}/>
         </ToolbarSearchStyled>
     );

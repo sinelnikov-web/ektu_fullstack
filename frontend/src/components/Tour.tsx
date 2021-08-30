@@ -70,7 +70,7 @@ const Tour = () => {
             spotlightClicks: true,
         },
         {
-            title: `${t('Новости')}.`,
+            title: `${t('Новости')}`,
             target: '.toolbar-weather',
             content: t('При нажатии на этот элемент Вы можете посмотреть последние новости.'),
             placement: 'top',

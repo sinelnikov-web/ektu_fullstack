@@ -16,6 +16,7 @@ interface CalendarProps {
     minutes: string
     seconds: string
     date: Date
+    setShowCalendar: (value: boolean) => void
 }
 
 export type DayType = {
@@ -27,7 +28,7 @@ export type DayType = {
 
 const Calendar: React.FC<CalendarProps> = ({
                                                hours, minutes,
-                                               seconds, date
+                                               seconds, date, setShowCalendar
                                            }) => {
 
 
@@ -77,6 +78,7 @@ const Calendar: React.FC<CalendarProps> = ({
     return (
         <CalendarStyled className={'calendar popup'} currentMonth={currentMonth}
                         monthOffset={monthOffset[currentMonth]}>
+            <span onClick={() => setShowCalendar(false)} className="close-btn"></span>
             <div className="calendar__head">
                 <time dateTime={'2021-08-14'}>
                     <div className="calendar__time">
@@ -168,7 +170,38 @@ const CalendarStyled = styled.div<CalendarStyledProps>`
   height: 700px;
   background-color: #233339;
   z-index: 10000;
-
+  .close-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg );
+    &:before {
+      content: '';
+      transform-origin: center;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      transform: translate(50%, -50%);
+    }
+    &:after {
+      content: '';
+      transform-origin: center;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      width: 2px;
+      height: 100%;
+      background-color: #fff;
+      transform: translate(100%, -50%);
+    }
+  }
+  
   .calendar__head {
     text-align: left;
     padding: 1.5rem 3.4rem;

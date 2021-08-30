@@ -9,9 +9,10 @@ interface SearchProps {
     files: Array<FileType>
     setFiles: (cllbck: (files: Array<FileType>) => Array<FileType>) => void
     className: string
+    setOpenSearch: (value: boolean) => void
 }
 
-const Search: React.FC<SearchProps> = ({files, setFiles, className}) => {
+const Search: React.FC<SearchProps> = ({files, setFiles, className, setOpenSearch}) => {
     const {t, i18n} = useTranslation()
     const [query, setQuery] = useState('')
 
@@ -32,13 +33,13 @@ const Search: React.FC<SearchProps> = ({files, setFiles, className}) => {
         })
     }
 
-
     return (
         <SearchStyled className={className + ' toolbar-search-popup'}>
+            <span onClick={() => setOpenSearch(false)} className="close-btn"></span>
             <div className="search__body">
                 {files.map(file => file.title.toLowerCase().includes(query.toLowerCase())
                     ?
-                    <div key={file.id} className={"search__result"}><File onClick={onFileClick} file={file} files={files}  /></div>
+                    <div key={file.id} className={"search__result"} onClick={() => setOpenSearch(false)}><File onClick={onFileClick} file={file} files={files}  /></div>
                     : <div key={file.id} className={"search__result hidden"}><File onClick={onFileClick} file={file} files={files}  /></div>)}
             </div>
             <div className="search__footer">
@@ -63,6 +64,39 @@ const SearchStyled = styled.div`
   display: flex;
   flex-direction: column;
   transition: opacity 0.1s ease-in-out;
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg);
+
+    &:before {
+      content: '';
+      transform-origin: center;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      width: 2px;
+      height: 100%;
+      background-color: #fff;
+      transform: translate(50%, -50%) rotate(90deg);
+    }
+
+    &:after {
+      content: '';
+      transform-origin: center;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      width: 2px;
+      height: 100%;
+      background-color: #fff;
+      transform: translate(100%, -50%);
+    }
+  }
   &.hidden {
     opacity: 0;
     height: 0;

@@ -9,14 +9,16 @@ const Article = loadable(() => import("./Article"))
 
 interface NewsWidgetProps {
     isOpen: boolean
+    setIsOpen: (value: boolean) => void
 }
 
-const NewsWidget: React.FC<NewsWidgetProps> = ({isOpen}) => {
+const NewsWidget: React.FC<NewsWidgetProps> = ({isOpen, setIsOpen}) => {
 
     const articles = useSelector(articlesSelector)
 
     return (
         <NewsWidgetStyled className={!isOpen ? 'hidden' : ''}>
+            <span onClick={() => setIsOpen(false)} className="close-btn"></span>
             <div className="news">
                 {articles.map(article => {
                     return (
@@ -36,9 +38,42 @@ const NewsWidgetStyled = styled.div`
   top: -1300%;
   left: -200%;
   background-color: #4C4C4C;
-  padding: 2rem;
+  padding: 5.5rem 2rem 2rem;
   overflow-y: auto;
   transition: opacity 0.2s linear;
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transform: rotate(45deg );
+    z-index: 9999;
+    &:before {
+      content: '';
+      transform-origin: center;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      transform: translate(50%, -50%);
+    }
+    &:after {
+      content: '';
+      transform-origin: center;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      width: 2px;
+      height: 100%;
+      background-color: #fff;
+      transform: translate(100%, -50%);
+    }
+  }
 
   &.hidden {
     height: 0;

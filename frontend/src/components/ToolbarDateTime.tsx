@@ -74,7 +74,7 @@ const ToolbarDateTime = () => {
                     </div>
                 </time>
             </div>
-            {globalTarget === mainRef.current && showCalendar && <Calendar date={date} hours={hours} minutes={minutes} seconds={seconds}/>}
+            {globalTarget === mainRef.current && showCalendar && <Calendar setShowCalendar={setShowCalendar} date={date} hours={hours} minutes={minutes} seconds={seconds}/>}
         </ToolbarDateTimeStyled>
     );
 };
@@ -84,7 +84,6 @@ const ToolbarDateTimeStyled = styled.div`
   text-align: center;
   width: 100%;
   height: 100%;
-
   .toolbar-icon-wrapper {
     padding: 0.5rem 0.5rem;
     width: 100%;

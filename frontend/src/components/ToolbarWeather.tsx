@@ -47,7 +47,7 @@ const ToolbarWeather = () => {
             <div className="toolbar-icon-mobile toolbar-icon-wrapper" onClick={() => setIsOpen(prev => !prev)}>
                 <span>{t('Новости')}</span>
             </div>
-            {isOpen && check && <NewsWidget isOpen={isOpen}/>}
+            {isOpen && check && <NewsWidget setIsOpen={setIsOpen} isOpen={isOpen}/>}
         </ToolbarWeatherStyled>
     );
 };
